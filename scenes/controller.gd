@@ -125,7 +125,7 @@ func life_down():
 			full_lifeforce = false
 
 func get_player():
-	var player_array = get_tree().get_nodes_in_group("Player")
+	var player_array = get_tree().get_nodes_in_group("Player0")
 	return player_array[player_array.size()-1]
 
 func scroll_camera():

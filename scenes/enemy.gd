@@ -33,6 +33,7 @@ func _death():
 	var instance = smoke_effects.instance()
 	var player = controller.get_player()
 	controller.current_map.add_child(instance)
+	controller.change_face("Excited")
 	instance.play()
 	instance.set_global_pos(get_global_pos()-Vector2(0,16))
 	instance.set_scale(Vector2(1 - 2*player.sees_left,1))
