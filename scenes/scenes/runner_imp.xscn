@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="10" version="2.1" version_name="Godot Engine v2.1.3.stable.official">
+	<ext_resource path="res://sounds/step.smp" type="Sample" index="1"></ext_resource>
+	<ext_resource path="res://images/runner.png" type="Texture" index="0"></ext_resource>
+	<resource type="GDScript" path="local://7">
+		<string name="script/source"> "&#000a;extends &quot;enemy.gd&quot;&#000a;&#000a;const R = 1&#000a;const L = -1&#000a;&#000a;export var max_hp = 4&#000a;var speed = 2&#000a;var direction&#000a;var detect&#000a;var marker = preload(&quot;res://scenes/marker.gd&quot;)&#000a;&#000a;func _ready():&#000a;&#0009;hp = max_hp&#000a;&#0009;direction = -1 + 2*(randi() % 2)&#000a;&#0009;set_scale(Vector2(direction, 1))&#000a;&#0009;detect = get_node(&quot;Detect&quot;)&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;var pos = get_pos() + Vector2(speed * direction, 0)&#000a;&#0009;set_pos(pos)&#000a;&#000a;func _on_Detect_body_enter( body ):&#000a;&#0009;if (body extends marker):&#000a;&#0009;&#0009;direction *= -1&#000a;&#0009;&#0009;set_scale(Vector2(direction, 1))&#000a;" </string>
+
+	</resource>
+	<resource type="RectangleShape2D" path="local://2">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 3, 3 </vector2>
+
+	</resource>
+	<resource type="Animation" path="local://4">
+		<string name="resource/name"> "Run" </string>
+		<real name="length"> 0.3 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.05 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<bool name="tracks/0/imported"> False </bool>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "times" </string>
+			<real_array  len="6"> 				0, 0.05, 0.1, 0.15, 0.2, 0.25 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
+			<string> "update" </string>
+			<int> 1 </int>
+			<string> "values" </string>
+			<array  len="6" shared="false">
+				<int> 8 </int>
+				<int> 9 </int>
+				<int> 10 </int>
+				<int> 11 </int>
+				<int> 12 </int>
+				<int> 13 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "value" </string>
+		<node_path name="tracks/1/path"> "SamplePlayer:play/play" </node_path>
+		<int name="tracks/1/interp"> 1 </int>
+		<bool name="tracks/1/imported"> False </bool>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "times" </string>
+			<real_array  len="1"> 				0.3 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "update" </string>
+			<int> 1 </int>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<string> "step" </string>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="RectangleShape2D" path="local://8">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 4, 8 </vector2>
+
+	</resource>
+	<resource type="RectangleShape2D" path="local://5">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 4, 8 </vector2>
+
+	</resource>
+	<resource type="GDScript" path="local://6">
+		<string name="script/source"> "&#000a;extends &quot;hurtful.gd&quot;&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;func _ready():&#000a;&#0009;# Initialization here&#000a;&#0009;pass&#000a;&#000a;&#000a;" </string>
+
+	</resource>
+	<resource type="SampleLibrary" path="local://9">
+		<dictionary name="samples/step" shared="false">
+			<string> "db" </string>
+			<real> -6 </real>
+			<string> "pitch" </string>
+			<real> 1.5 </real>
+			<string> "priority" </string>
+			<int> 0 </int>
+			<string> "sample" </string>
+			<resource  external="1">  </resource>
+		</dictionary>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 1 </int>
+			<string> "conns" </string>
+			<int_array  len="6"> 				1, 0, 55, 54, 2, 0 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="56">
+				<string> "Runner Imp" </string>
+				<string> "z/z" </string>
+				<string> "input/pickable" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "collision/margin" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "max_hp" </string>
+				<string> "KinematicBody2D" </string>
+				<string> "Detect" </string>
+				<string> "editor/display_folded" </string>
+				<string> "transform/pos" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "gravity_vec" </string>
+				<string> "gravity" </string>
+				<string> "linear_damp" </string>
+				<string> "angular_damp" </string>
+				<string> "Area2D" </string>
+				<string> "CollisionShape2D" </string>
+				<string> "shape" </string>
+				<string> "trigger" </string>
+				<string> "_update_shape_index" </string>
+				<string> "Sprite" </string>
+				<string> "texture" </string>
+				<string> "flip_h" </string>
+				<string> "vframes" </string>
+				<string> "hframes" </string>
+				<string> "frame" </string>
+				<string> "AnimationPlayer" </string>
+				<string> "playback/process_mode" </string>
+				<string> "playback/default_blend_time" </string>
+				<string> "root/root" </string>
+				<string> "anims/Run" </string>
+				<string> "playback/active" </string>
+				<string> "playback/speed" </string>
+				<string> "blend_times" </string>
+				<string> "autoplay" </string>
+				<string> "Hitbox" </string>
+				<string> "visibility/visible" </string>
+				<string> "Hurtbox" </string>
+				<string> "Shape2d" </string>
+				<string> "SamplePlayer" </string>
+				<string> "params/volume_db" </string>
+				<string> "params/pitch_scale" </string>
+				<string> "params/attenuation/min_distance" </string>
+				<string> "params/attenuation/max_distance" </string>
+				<string> "params/attenuation/distance_exp" </string>
+				<string> "config/polyphony" </string>
+				<string> "config/samples" </string>
+				<string> "config/pitch_random" </string>
+				<string> "SamplePlayer2D" </string>
+				<string> "_on_Detect_body_enter" </string>
+				<string> "body_enter" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 10 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="214"> 				-1, -1, 9, 0, -1, 8, 1, 0, 2, 1, 3, 0, 4, 0, 5, 2, 6, 3, 7, 4, 8, 0, 0, 0, 0, 20, 10, -1, 10, 11, 5, 12, 6, 2, 5, 13, 7, 14, 8, 15, 1, 16, 9, 17, 10, 18, 11, 19, 12, 0, 1, 0, 21, 21, -1, 3, 22, 7, 23, 1, 24, 13, 0, 0, 0, 25, 25, -1, 6, 12, 14, 26, 15, 27, 5, 28, 16, 29, 16, 30, 17, 0, 0, 0, 31, 31, -1, 8, 32, 0, 33, 18, 34, 19, 35, 20, 36, 5, 37, 12, 38, 21, 39, 22, 0, 0, 0, 20, 40, -1, 10, 11, 5, 41, 1, 2, 5, 13, 23, 14, 24, 15, 1, 16, 9, 17, 10, 18, 11, 19, 12, 0, 5, 0, 21, 21, -1, 4, 12, 25, 22, 23, 23, 1, 24, 13, 0, 0, 0, 9, 42, -1, 11, 11, 5, 41, 1, 12, 26, 2, 1, 13, 27, 14, 28, 15, 5, 3, 0, 4, 0, 5, 2, 6, 29, 0, 7, 0, 21, 43, -1, 4, 12, 30, 22, 27, 23, 5, 24, 13, 0, 0, 0, 53, 44, -1, 8, 45, 18, 46, 12, 47, 31, 48, 32, 49, 12, 50, 0, 51, 33, 52, 18, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="34" shared="false">
+				<int> 1 </int>
+				<bool> False </bool>
+				<real> 0.08 </real>
+				<resource  resource_type="Script" path="local://7">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
+					<string> "_edit_group_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<bool> True </bool>
+				<vector2> 10, -7 </vector2>
+				<resource  resource_type="Shape2D" path="local://2">  </resource>
+				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<vector2> 0, 1 </vector2>
+				<real> 98 </real>
+				<real> 0.1 </real>
+				<real> 1 </real>
+				<int> -1 </int>
+				<vector2> 0, -8 </vector2>
+				<resource  external="0">  </resource>
+				<int> 8 </int>
+				<int> 10 </int>
+				<real> 0 </real>
+				<node_path> ".." </node_path>
+				<resource  resource_type="Animation" path="local://4">  </resource>
+				<array  len="0" shared="false">
+				</array>
+				<string> "Run" </string>
+				<resource  resource_type="Shape2D" path="local://8">  </resource>
+				<matrix32> 1, -0, 0, 1, 1, -8 </matrix32>
+				<vector2> 1, -8 </vector2>
+				<vector2> -1, -8 </vector2>
+				<resource  resource_type="Shape2D" path="local://5">  </resource>
+				<matrix32> 1, -0, 0, 1, 2, 0 </matrix32>
+				<resource  resource_type="Script" path="local://6">  </resource>
+				<vector2> 2, 0 </vector2>
+				<real> 160 </real>
+				<real> 320 </real>
+				<resource  resource_type="SampleLibrary" path="local://9">  </resource>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>
