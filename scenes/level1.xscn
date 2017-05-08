@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resource_file type="PackedScene" subresource_count="14" version="2.1" version_name="Godot Engine v2.1.3.stable.official">
-	<ext_resource path="res://images/snowbg3.png" type="Texture" index="10"></ext_resource>
-	<ext_resource path="res://images/snowbg2.png" type="Texture" index="11"></ext_resource>
 	<ext_resource path="res://images/snowbg1.png" type="Texture" index="12"></ext_resource>
-	<ext_resource path="res://scenes/checkpoint.scn" type="PackedScene" index="1"></ext_resource>
+	<ext_resource path="res://images/snowbg2.png" type="Texture" index="11"></ext_resource>
 	<ext_resource path="res://scenes/anchor.xscn" type="PackedScene" index="2"></ext_resource>
-	<ext_resource path="res://scenes/player.res" type="PackedScene" index="0"></ext_resource>
-	<ext_resource path="res://scenes/l1_entrance.xscn" type="PackedScene" index="4"></ext_resource>
-	<ext_resource path="res://scenes/l1_arenasplit.scn" type="PackedScene" index="7"></ext_resource>
-	<ext_resource path="res://scenes/l1_classmates.xscn" type="PackedScene" index="9"></ext_resource>
-	<ext_resource path="res://scenes/l1_bossroom.scn" type="PackedScene" index="8"></ext_resource>
+	<ext_resource path="res://images/snowbg3.png" type="Texture" index="10"></ext_resource>
+	<ext_resource path="res://scenes/checkpoint.scn" type="PackedScene" index="1"></ext_resource>
 	<ext_resource path="res://scenes/l1_iciclepit.xscn" type="PackedScene" index="3"></ext_resource>
+	<ext_resource path="res://scenes/player.res" type="PackedScene" index="0"></ext_resource>
+	<ext_resource path="res://scenes/l1_classmates.xscn" type="PackedScene" index="9"></ext_resource>
+	<ext_resource path="res://scenes/l1_arenasplit.scn" type="PackedScene" index="7"></ext_resource>
 	<ext_resource path="res://scenes/l1_magestairs.scn" type="PackedScene" index="6"></ext_resource>
+	<ext_resource path="res://scenes/l1_bossroom.scn" type="PackedScene" index="8"></ext_resource>
 	<ext_resource path="res://scenes/l1_impmix.xscn" type="PackedScene" index="5"></ext_resource>
+	<ext_resource path="res://scenes/l1_entrance.xscn" type="PackedScene" index="4"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -28,12 +28,12 @@
 				<string> "__meta__" </string>
 				<string> "Node2D" </string>
 				<string> "Player" </string>
+				<string> "transform/pos" </string>
 				<string> "playernumber" </string>
 				<string> "playercolor" </string>
 				<string> "Player1" </string>
 				<string> "Checkpoints" </string>
 				<string> "Checkpoint" </string>
-				<string> "transform/pos" </string>
 				<string> "Checkpoint1" </string>
 				<string> "id" </string>
 				<string> "Checkpoint2" </string>
@@ -77,16 +77,18 @@
 			<array  len="0" shared="false">
 			</array>
 			<string> "nodes" </string>
-			<int_array  len="284"> 				-1, -1, 2, 0, -1, 1, 1, 0, 0, 0, 0, 2147483647, 3, 1, 2, 4, 2, 5, 3, 0, 0, 0, 2147483647, 6, 1, 2, 4, 4, 5, 5, 0, 0, 0, 2, 7, -1, 0, 0, 3, 0, 2147483647, 8, 6, 1, 9, 7, 0, 3, 0, 2147483647, 10, 6, 2, 9, 8, 11, 4, 0, 3, 0, 2147483647, 12, 6, 3, 9, 9, 13, 10, 11, 11, 0, 3, 0, 2147483647, 14, 6, 3, 9, 12, 13, 10, 11, 13, 0, 0, 0, 2, 15, -1, 2, 16, 14, 1, 15, 0, 8, 0, 2147483647, 17, 16, 1, 9, 17, 0, 0, 0, 2147483647, 18, 18, 2, 16, 14, 9, 19, 0, 0, 0, 2147483647, 19, 20, 2, 16, 14, 9, 21, 0, 0, 0, 2147483647, 20, 22, 1, 9, 23, 0, 0, 0, 2147483647, 21, 24, 1, 9, 25, 0, 0, 0, 2147483647, 22, 26, 1, 9, 27, 0, 0, 0, 2147483647, 23, 28, 1, 9, 29, 0, 0, 0, 2147483647, 24, 30, 1, 9, 31, 0, 0, 0, 25, 25, -1, 10, 26, 32, 27, 33, 28, 34, 29, 35, 30, 33, 31, 33, 32, 35, 33, 33, 34, 33, 35, 14, 0, 17, 0, 40, 36, -1, 4, 37, 36, 38, 33, 39, 37, 1, 38, 0, 18, 0, 41, 41, -1, 4, 9, 39, 42, 40, 43, 41, 1, 42, 0, 17, 0, 40, 44, -1, 4, 37, 43, 38, 33, 39, 37, 1, 44, 0, 20, 0, 41, 41, -1, 3, 9, 39, 42, 45, 1, 46, 0, 17, 0, 40, 45, -1, 4, 37, 47, 38, 33, 39, 37, 1, 48, 0, 22, 0, 41, 41, -1, 3, 9, 39, 42, 49, 1, 50, 0 </int_array>
+			<int_array  len="288"> 				-1, -1, 2, 0, -1, 1, 1, 0, 0, 0, 0, 2147483647, 3, 1, 3, 4, 2, 5, 3, 6, 4, 0, 0, 0, 2147483647, 7, 1, 3, 4, 5, 5, 6, 6, 7, 0, 0, 0, 2, 8, -1, 0, 0, 3, 0, 2147483647, 9, 8, 1, 4, 9, 0, 3, 0, 2147483647, 10, 8, 2, 4, 10, 11, 6, 0, 3, 0, 2147483647, 12, 8, 3, 4, 11, 13, 12, 11, 13, 0, 3, 0, 2147483647, 14, 8, 3, 4, 14, 13, 12, 11, 15, 0, 0, 0, 2, 15, -1, 2, 16, 16, 1, 17, 0, 8, 0, 2147483647, 17, 18, 1, 4, 19, 0, 0, 0, 2147483647, 18, 20, 2, 16, 16, 4, 21, 0, 0, 0, 2147483647, 19, 22, 2, 16, 16, 4, 23, 0, 0, 0, 2147483647, 20, 24, 1, 4, 25, 0, 0, 0, 2147483647, 21, 26, 1, 4, 27, 0, 0, 0, 2147483647, 22, 28, 1, 4, 29, 0, 0, 0, 2147483647, 23, 30, 1, 4, 31, 0, 0, 0, 2147483647, 24, 32, 1, 4, 33, 0, 0, 0, 25, 25, -1, 10, 26, 34, 27, 35, 28, 36, 29, 37, 30, 35, 31, 35, 32, 37, 33, 35, 34, 35, 35, 16, 0, 17, 0, 40, 36, -1, 4, 37, 38, 38, 35, 39, 39, 1, 40, 0, 18, 0, 41, 41, -1, 4, 4, 41, 42, 42, 43, 43, 1, 44, 0, 17, 0, 40, 44, -1, 4, 37, 45, 38, 35, 39, 39, 1, 46, 0, 20, 0, 41, 41, -1, 3, 4, 41, 42, 47, 1, 48, 0, 17, 0, 40, 45, -1, 4, 37, 49, 38, 35, 39, 39, 1, 50, 0, 22, 0, 41, 41, -1, 3, 4, 41, 42, 51, 1, 52, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="51" shared="false">
+			<array  len="53" shared="false">
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
 				</dictionary>
 				<resource  external="0">  </resource>
+				<vector2> 47.0002, 161 </vector2>
 				<int> 0 </int>
 				<color> 0, 0, 0, 1 </color>
+				<vector2> -24.0001, 227.001 </vector2>
 				<int> 1 </int>
 				<color> 0.245182, 0.241699, 0.6875, 1 </color>
 				<resource  external="1">  </resource>

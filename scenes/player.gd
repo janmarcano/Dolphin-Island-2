@@ -84,7 +84,8 @@ func _ready():
 	aspd = get_node("/root/Progress").checks["AttackSpeedUpgrade"]
 	strong_slash = get_node("/root/Progress").checks["StrongSlash"]
 	sfx = get_node("SamplePlayer")
-	controller.cam_target = self
+	if playernumber == 0:
+		controller.cam_target = self
 	attack_spot = get_node("AttackSpot")
 	effects = get_node("Effects")
 	top_sprite = get_node("TopAnim")
@@ -213,7 +214,8 @@ func _movement(delta):
 		can_jump = false
 		sfx.play("jump")
 		create_dust("Jump")
-		controller.change_face("Happy")
+		if playernumber == 0:
+			controller.change_face("Happy")
 		if (not is_attacking()):
 			top_sprite.play("Jump")
 		bot_sprite.play("Jump")
@@ -309,7 +311,8 @@ func attack():
 			top_sprite.play("Attack2")
 		elif (top_sprite.get_current_animation() == "Attack2"):
 			top_sprite.play("Attack")
-		controller.change_face("Mean")
+		if playernumber == 0:
+			controller.change_face("Mean")
 
 func strong_attack():
 		attacking = true
@@ -340,24 +343,25 @@ func create_dust(type):
 	instance.set_global_pos(get_global_pos()+Vector2(0,32))
 	instance.set_scale(Vector2(1 - 2*sees_left,1))
 
-func _on_Hitbox_body_enter( body ):
-	if (body extends hurtful_class):
-		# Knockback some time maybe
-		if (not dead and vulnerable):
-			vulnerable = false
-			effects.play("Invulnerable")
-			controller.life_down()
-	elif (body extends killer_class):
-		if (not dead):
-			controller.life_down()
-			controller.life_down()
+func _on_Hitbox_body_enter( body ): #Collision
+	if playernumber == 0:
+		if (body extends hurtful_class):
+			# Knockback some time maybe
+			if (not dead and vulnerable):
+				vulnerable = false
+				effects.play("Invulnerable")
+				controller.life_down()
+		elif (body extends killer_class):
+			if (not dead):
+				controller.life_down()
+				controller.life_down()
 
-func death():
-	dead = true
+func death(): #Death Function
+	dead = true 
 	var map = controller.current_map
 	var instance = smoke_effects.instance()
-	map.add_child(instance)
-	get_node("/root/SoundManager").play_sfx("smoke",true)
+	map.add_child(instance) #Add smoke effects
+	get_node("/root/SoundManager").play_sfx("smoke",true) #Add sound effects
 	instance.play()
 	instance.set_global_pos(get_global_pos()-Vector2(0,16))
 	instance.set_scale(Vector2(1 - 2*sees_left,1))

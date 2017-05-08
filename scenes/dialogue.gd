@@ -19,14 +19,15 @@ func _fixed_process(delta):
 		if (Input.is_action_pressed("attack") or Input.is_action_pressed("jump")):
 			if (current_text.size() > 0):
 				snd_manager.play_sfx("accept")
-				label.set_text(current_text[0])
+				#label.clear()
+				label.set_text(current_text[0])#label.add_text(current_text[0])
 				current_text.remove(0)
 				state = "waitread"
 				timer.start()
 			else:
 				snd_manager.play_sfx("cancel")
 				state = "waitdisappear"
-				label.set_text("")
+				label.set_text("")#label.clear()
 				play("Disappear")
 				timer.set_wait_time(get_current_animation_length())
 				timer.start()

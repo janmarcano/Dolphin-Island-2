@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="15" version="2.1" version_name="Godot Engine v2.1.3.stable.official">
+	<ext_resource path="res://scenes/outer.xml" type="TileSet" index="2"></ext_resource>
+	<ext_resource path="res://scenes/overlay.xml" type="TileSet" index="1"></ext_resource>
+	<ext_resource path="res://scenes/stone.xml" type="TileSet" index="3"></ext_resource>
+	<ext_resource path="res://scenes/worm.xscn" type="PackedScene" index="8"></ext_resource>
+	<ext_resource path="res://scenes/anchor.xscn" type="PackedScene" index="5"></ext_resource>
+	<ext_resource path="res://scenes/teleport.xscn" type="PackedScene" index="6"></ext_resource>
+	<ext_resource path="res://scenes/objects/Players.tscn" type="PackedScene" index="0"></ext_resource>
+	<ext_resource path="res://images/hubbg1.png" type="Texture" index="11"></ext_resource>
+	<ext_resource path="res://images/hubbg3.png" type="Texture" index="9"></ext_resource>
+	<ext_resource path="res://images/hubbg2.png" type="Texture" index="10"></ext_resource>
+	<ext_resource path="res://scenes/marker.xscn" type="PackedScene" index="7"></ext_resource>
+	<ext_resource path="res://scenes/checkpoint.scn" type="PackedScene" index="4"></ext_resource>
+	<resource type="RectangleShape2D" path="local://1">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 3.36975, 130.694 </vector2>
+
+	</resource>
+	<resource type="GDScript" path="local://2">
+		<string name="script/source"> "&#000a;extends &quot;cutscene.gd&quot;&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;func _ready():&#000a;&#0009;text = [&quot;[Aisha]: What is this?&quot;,&#000a;&#0009;&#0009;&#0009;&quot;[Sora]: A statue.&quot;,&#000a;&#0009;&#0009;&#0009;&quot;[Aisha]: Yes obiviously, but of what?&quot;,&#000a;&#0009;&#0009;&#0009;&quot;[Sora]: I don&apos;t know \nI wasn&apos;t thinking about it.&quot;,&#000a;&#0009;&#0009;&#0009;&quot;[Aisha]: I wonder if this is tied \nto the Devil King.&quot;,]&#000a;&#0009;check = &quot;level2Intro&quot;&#000a;&#0009;pass&#000a;&#000a;&#000a;" </string>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 0 </int>
+			<string> "conns" </string>
+			<int_array  len="0"> 				 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "names" </string>
+			<string_array  len="88">
+				<string> "Node2D" </string>
+				<string> "__meta__" </string>
+				<string> "Players" </string>
+				<string> "transform/pos" </string>
+				<string> "Overlay" </string>
+				<string> "z/z" </string>
+				<string> "mode" </string>
+				<string> "tile_set" </string>
+				<string> "cell/size" </string>
+				<string> "cell/quadrant_size" </string>
+				<string> "cell/custom_transform" </string>
+				<string> "cell/half_offset" </string>
+				<string> "cell/tile_origin" </string>
+				<string> "cell/y_sort" </string>
+				<string> "collision/use_kinematic" </string>
+				<string> "collision/friction" </string>
+				<string> "collision/bounce" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "occluder/light_mask" </string>
+				<string> "tile_data" </string>
+				<string> "TileMap" </string>
+				<string> "Polygon2D" </string>
+				<string> "polygon" </string>
+				<string> "uv" </string>
+				<string> "color" </string>
+				<string> "vertex_colors" </string>
+				<string> "offset" </string>
+				<string> "texture/texture" </string>
+				<string> "texture/offset" </string>
+				<string> "texture/scale" </string>
+				<string> "texture/rotation" </string>
+				<string> "invert/enable" </string>
+				<string> "invert/border" </string>
+				<string> "Stone" </string>
+				<string> "Checkpoints" </string>
+				<string> "Checkpoint" </string>
+				<string> "Checkpoint2" </string>
+				<string> "id" </string>
+				<string> "Events" </string>
+				<string> "Intro" </string>
+				<string> "input/pickable" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "gravity_vec" </string>
+				<string> "gravity" </string>
+				<string> "linear_damp" </string>
+				<string> "angular_damp" </string>
+				<string> "script/script" </string>
+				<string> "Area2D" </string>
+				<string> "CollisionShape2D" </string>
+				<string> "transform/scale" </string>
+				<string> "shape" </string>
+				<string> "trigger" </string>
+				<string> "_update_shape_index" </string>
+				<string> "CameraAnchor" </string>
+				<string> "CameraAnchor1" </string>
+				<string> "Teleport" </string>
+				<string> "level" </string>
+				<string> "Enemies" </string>
+				<string> "editor/display_folded" </string>
+				<string> "Marker" </string>
+				<string> "Marker1" </string>
+				<string> "Marker2" </string>
+				<string> "Marker3" </string>
+				<string> "Worm" </string>
+				<string> "Worm1" </string>
+				<string> "ParallaxLayer" </string>
+				<string> "layer" </string>
+				<string> "rotation" </string>
+				<string> "scale" </string>
+				<string> "scroll/offset" </string>
+				<string> "scroll/base_offset" </string>
+				<string> "scroll/base_scale" </string>
+				<string> "scroll/limit_begin" </string>
+				<string> "scroll/limit_end" </string>
+				<string> "scroll/ignore_camera_zoom" </string>
+				<string> "ParallaxBackground" </string>
+				<string> "Third" </string>
+				<string> "visibility/visible" </string>
+				<string> "motion/scale" </string>
+				<string> "motion/offset" </string>
+				<string> "motion/mirroring" </string>
+				<string> "Sprite" </string>
+				<string> "texture" </string>
+				<string> "Second" </string>
+				<string> "First" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 29 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
+			<string> "nodes" </string>
+			<int_array  len="457"> 				-1, -1, 0, 0, -1, 1, 1, 0, 0, 0, 0, 2147483647, 2, 1, 1, 3, 2, 0, 0, 0, 21, 4, -1, 18, 3, 3, 5, 4, 6, 5, 7, 6, 8, 7, 9, 8, 10, 9, 11, 10, 12, 5, 13, 11, 14, 11, 15, 12, 16, 13, 17, 14, 18, 14, 19, 14, 20, 15, 1, 16, 0, 0, 0, 21, 21, -1, 16, 6, 5, 7, 17, 8, 7, 9, 8, 10, 9, 11, 10, 12, 5, 13, 11, 14, 11, 15, 12, 16, 13, 17, 14, 18, 14, 19, 14, 20, 18, 1, 19, 0, 3, 0, 22, 22, -1, 11, 23, 20, 24, 20, 25, 21, 26, 22, 27, 23, 28, 24, 29, 23, 30, 25, 31, 13, 32, 11, 33, 26, 0, 0, 0, 21, 34, -1, 16, 6, 5, 7, 27, 8, 7, 9, 8, 10, 9, 11, 10, 12, 5, 13, 11, 14, 11, 15, 12, 16, 13, 17, 14, 18, 14, 19, 14, 20, 28, 1, 29, 0, 0, 0, 0, 35, -1, 1, 1, 30, 0, 6, 0, 2147483647, 36, 31, 1, 3, 32, 0, 6, 0, 2147483647, 37, 31, 2, 3, 33, 38, 14, 0, 0, 0, 0, 39, -1, 1, 1, 34, 0, 9, 0, 50, 40, -1, 10, 3, 35, 41, 36, 42, 37, 43, 38, 44, 11, 45, 39, 46, 40, 47, 41, 48, 12, 49, 42, 0, 10, 0, 51, 51, -1, 5, 3, 43, 52, 44, 53, 37, 54, 11, 55, 5, 0, 9, 0, 2147483647, 56, 45, 1, 3, 46, 0, 9, 0, 2147483647, 57, 45, 2, 3, 47, 52, 48, 0, 9, 0, 2147483647, 58, 49, 2, 3, 50, 59, 51, 0, 0, 0, 0, 60, -1, 2, 61, 36, 1, 52, 0, 15, 0, 2147483647, 62, 53, 1, 3, 54, 0, 15, 0, 2147483647, 63, 53, 1, 3, 55, 0, 15, 0, 2147483647, 64, 53, 1, 3, 56, 0, 15, 0, 2147483647, 65, 53, 1, 3, 57, 0, 15, 0, 2147483647, 66, 58, 1, 3, 59, 0, 15, 0, 2147483647, 67, 58, 1, 3, 60, 0, 0, 0, 78, 68, -1, 10, 69, 61, 27, 23, 70, 13, 71, 25, 72, 23, 73, 23, 74, 25, 75, 23, 76, 23, 77, 36, 0, 22, 0, 68, 79, -1, 5, 61, 36, 80, 11, 81, 62, 82, 23, 83, 63, 0, 23, 0, 84, 84, -1, 2, 3, 64, 85, 65, 0, 22, 0, 68, 86, -1, 5, 61, 36, 80, 11, 81, 66, 82, 23, 83, 63, 0, 25, 0, 84, 84, -1, 2, 3, 64, 85, 67, 0, 22, 0, 68, 87, -1, 5, 61, 36, 80, 11, 81, 68, 82, 23, 83, 63, 0, 27, 0, 84, 84, -1, 2, 3, 69, 85, 70, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="71" shared="false">
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "2D" </string>
+				</dictionary>
+				<resource  external="0">  </resource>
+				<vector2> 25.4848, 197.23 </vector2>
+				<vector2> 0, 8 </vector2>
+				<int> 3 </int>
+				<int> 0 </int>
+				<resource  external="1">  </resource>
+				<vector2> 16, 16 </vector2>
+				<int> 16 </int>
+				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<int> 2 </int>
+				<bool> False </bool>
+				<real> 1 </real>
+				<real> 0 </real>
+				<int> 1 </int>
+				<int_array  len="2"> 					1703989, 0 </int_array>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<resource  external="2">  </resource>
+				<int_array  len="184"> 					-524296, 3, -458760, 3, -393224, 3, -327688, 3, -262152, 3, -196616, 3, -131080, 3, -65544, 3, -8, 3, 65528, 3, 131064, 3, 196600, 3, 262136, 10, 262137, 5, 327673, 3, 393209, 3, 458745, 10, 458746, 5, 524282, 10, 524283, 5, 589819, 3, 655355, 3, 720891, 3, 786427, 3, 851963, 3, 917499, 3, 983035, 3, 1048571, 3, 983078, 4, 983079, 0, 983080, 0, 983081, 0, 983082, 0, 983083, 0, 983084, 0, 983085, 0, 983086, 0, 983087, 0, 983088, 0, 983089, 0, 983090, 0, 983091, 0, 983092, 0, 983093, 0, 1114107, 3, 1048602, 4, 1048603, 0, 1048604, 0, 1048605, 0, 1048606, 0, 1048607, 0, 1048608, 0, 1048609, 0, 1048610, 0, 1048611, 0, 1048612, 0, 1048613, 0, 1048614, 11, 1179643, 3, 1114131, 4, 1114132, 0, 1114133, 0, 1114134, 0, 1114135, 0, 1114136, 0, 1114137, 0, 1114138, 11, 1245179, 10, 1245180, 0, 1245181, 0, 1245182, 0, 1245183, 0, 1179648, 0, 1179649, 0, 1179650, 0, 1179651, 0, 1179652, 0, 1179653, 0, 1179654, 0, 1179655, 0, 1179656, 0, 1179657, 0, 1179658, 0, 1179659, 0, 1179660, 0, 1179661, 0, 1179662, 0, 1179663, 0, 1179664, 0, 1179665, 0, 1179666, 0, 1179667, 11 </int_array>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2_array  len="0"> 					 </vector2_array>
+				<color> 0.133333, 0.12549, 0.203922, 1 </color>
+				<color_array  len="0"> 					 </color_array>
+				<vector2> 0, 0 </vector2>
+				<resource name=""></resource>				<vector2> 1, 1 </vector2>
+				<real> 100 </real>
+				<resource  external="3">  </resource>
+				<int_array  len="122"> 					655441, 4, 655442, 9, 655443, 9, 655444, 9, 655445, 9, 655446, 9, 655447, 9, 655448, 9, 655449, 9, 655450, 9, 655451, 9, 655452, 9, 655453, 9, 655454, 9, 655455, 9, 655456, 9, 655457, 9, 655458, 9, 655459, 9, 655460, 9, 655461, 9, 655462, 9, 655463, 9, 655464, 9, 655465, 9, 655466, 9, 655467, 9, 655468, 9, 655469, 9, 720953, 4, 720954, 9, 720955, 9, 720956, 9, 720957, 9, 720958, 9, 720959, 9, 720960, 9, 720961, 9, 720962, 9, 720963, 9, 720964, 9, 720965, 9, 720966, 9, 720967, 9, 720968, 9, 720969, 9, 720970, 9, 720971, 9, 720972, 9, 720973, 9, 720974, 9, 720975, 9, 720976, 9, 720977, 7, 786488, 4, 786489, 7, 852023, 4, 852024, 7, 917558, 4, 917559, 7, 983094, 7 </int_array>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<resource  external="4">  </resource>
+				<vector2> -19.3605, 284.985 </vector2>
+				<vector2> 1743.69, 159.98 </vector2>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> 1691.52, 101.384 </vector2>
+				<bool> True </bool>
+				<resource  resource_type="Shape2D" path="local://1">  </resource>
+				<matrix32> 0.764512, -0, 0, 0.594352, 23.8167, -18.2197 </matrix32>
+				<vector2> 0, 1 </vector2>
+				<real> 98 </real>
+				<real> 0.1 </real>
+				<resource  resource_type="Script" path="local://2">  </resource>
+				<vector2> 23.8167, -18.2197 </vector2>
+				<vector2> 0.764512, 0.594352 </vector2>
+				<resource  external="5">  </resource>
+				<vector2> -16, 272 </vector2>
+				<vector2> 1424, 368 </vector2>
+				<vector2> -1, 1 </vector2>
+				<resource  external="6">  </resource>
+				<vector2> 1568, 336 </vector2>
+				<string> "level1" </string>
+				<dictionary  shared="false">
+					<string> "_edit_lock_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<resource  external="7">  </resource>
+				<vector2> 768, 432 </vector2>
+				<vector2> 943, 432 </vector2>
+				<vector2> 1227.8, 384.208 </vector2>
+				<vector2> 1075.65, 384.208 </vector2>
+				<resource  external="8">  </resource>
+				<vector2> 824, 432 </vector2>
+				<vector2> 1145.2, 383.72 </vector2>
+				<int> -1 </int>
+				<vector2> 0.1, 0 </vector2>
+				<vector2> 480, 0 </vector2>
+				<vector2> 240, 96 </vector2>
+				<resource  external="9">  </resource>
+				<vector2> 0.4, 0.1 </vector2>
+				<resource  external="10">  </resource>
+				<vector2> 0.8, 0.3 </vector2>
+				<vector2> 240, 144 </vector2>
+				<resource  external="11">  </resource>
+			</array>
+			<string> "version" </string>
+			<int> 2 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>

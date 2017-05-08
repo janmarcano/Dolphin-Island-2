@@ -21,6 +21,7 @@ var fader
 var bosshp
 var face_anim
 var text_win
+var multiplayer
 # Camera Variables
 var camera
 var cam_collision
@@ -37,6 +38,7 @@ var snd_manager
 # Input variables
 var cutscene = false
 var press_full = false
+var numberofplayers = 1
 
 func _ready():
 #	OS.set_iterations_per_second(60)
@@ -53,6 +55,7 @@ func _ready():
 	fader = root.get_node("UILayer/Fade")
 	face_anim = ui.get_node("FaceAnim")
 	text_win = ui.get_node("TextWindow")
+	multiplayer = ui.get_node("enablesora") #For enabling and disabling multiplayer with sora
 	map_layer = root.get_node("Map")
 	camera = root.get_node("Map/Camera")
 	camera.make_current()
