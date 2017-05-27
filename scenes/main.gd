@@ -4,11 +4,13 @@ extends Node2D
 const map_names = { "res://scenes/title_screen.xscn":"title", 
 					"res://scenes/tutorial.xscn":"tutorial", 
 					"res://scenes/level1.xscn":"level1",
-					"res://scenes/game_over.xscn":"gameover", }
+					"res://scenes/game_over.xscn":"gameover", 
+					"res://scenes/level2.xscn":"level2",}
 const map_songs = {	"level1":"res://sounds/snow.ogg",
 					"tutorial":null,
 					"title":"res://sounds/undine.ogg",
-					"gameover":null, }
+					"gameover":null, 
+					"level2":null,}
 
 var c
 var load_state = 0

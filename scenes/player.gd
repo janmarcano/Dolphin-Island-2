@@ -8,6 +8,8 @@ const FLOOR_ANGLE = 40
 const WALK_FORCE = 600
 const WALK_MIN = 10
 const WALK_MAX = 200
+const WALK_NORMAL = 200
+const SPRINT_SPEED = 500
 const STOP_FORCE = 1300
 const STOP_COEFF = 0.65
 const MAX_JUMP = 0.105#0.65
@@ -33,6 +35,9 @@ var walk_up
 var walk_down
 var jump
 var attack
+var sprint
+export var playernumber = 0
+export var playercolor = Color()
 # Combat
 var hurtful_class = preload("res://scenes/hurtful.gd")
 var killer_class = preload("res://scenes/killer.gd")
@@ -64,13 +69,23 @@ var controller
 var cutscene = false
 
 func _ready():
+	if playernumber == 0:
+		add_to_group("Player")
+		add_to_group("Player"+str(playernumber))
+	if playernumber != 0: #For second player
+		get_node("TopBody").set_modulate(playercolor)
+		get_node("LowerBody").set_modulate(playercolor)
+		add_to_group("Player"+str(playernumber))
+		remove_from_group("Player")
+	
 	jump_time = get_node("Jump")
 	jump_time.set_wait_time(MAX_JUMP)
 	controller = get_node("/root/Controller")
 	aspd = get_node("/root/Progress").checks["AttackSpeedUpgrade"]
 	strong_slash = get_node("/root/Progress").checks["StrongSlash"]
 	sfx = get_node("SamplePlayer")
-	controller.cam_target = self
+	if playernumber == 0:
+		controller.cam_target = self
 	attack_spot = get_node("AttackSpot")
 	effects = get_node("Effects")
 	top_sprite = get_node("TopAnim")
@@ -82,12 +97,13 @@ func _fixed_process(delta):
 	if (bot_sprite.get_current_animation() != "Victory" and effects.get_current_animation() != "Invulnerable"):
 		effects.play("UpNone")
 	if(not cutscene):
-		walk_left = Input.is_action_pressed("ui_left")
-		walk_right = Input.is_action_pressed("ui_right")
-		walk_up = Input.is_action_pressed("ui_up")
-		walk_down = Input.is_action_pressed("ui_down")
-		jump = Input.is_action_pressed("jump")
-		attack = Input.is_action_pressed("attack")
+		walk_left = Input.is_action_pressed(str(playernumber)+"left")
+		walk_right = Input.is_action_pressed(str(playernumber)+"right")
+		walk_up = Input.is_action_pressed(str(playernumber)+"up")
+		walk_down = Input.is_action_pressed(str(playernumber)+"down")
+		jump = Input.is_action_pressed(str(playernumber)+"jump")
+		attack = Input.is_action_pressed(str(playernumber)+"attack")
+		sprint = Input.is_action_pressed(str(playernumber)+"sprint")
 	else:
 		walk_left = false
 		walk_right = false
@@ -95,6 +111,7 @@ func _fixed_process(delta):
 		walk_down = false
 		jump = false
 		attack = false
+		sprint = false
 	if (not dead):
 		_movement(delta)
 
@@ -106,6 +123,10 @@ func _movement(delta):
 	var stop = true
 #	print("V1:" + str(velocity.x) + " F:" + str(force.x))
 	# Sideways movement
+	if (sprint):
+		WALK_MAX = SPRINT_SPEED
+	else:
+		WALK_MAX = WALK_NORMAL
 	if (walk_left and not walk_right):
 		if (velocity.x<=WALK_MIN and velocity.x > -WALK_MAX):
 			force.x-=WALK_FORCE
@@ -193,6 +214,8 @@ func _movement(delta):
 		can_jump = false
 		sfx.play("jump")
 		create_dust("Jump")
+		if playernumber == 0:
+			controller.change_face("Happy")
 		if (not is_attacking()):
 			top_sprite.play("Jump")
 		bot_sprite.play("Jump")
@@ -288,6 +311,8 @@ func attack():
 			top_sprite.play("Attack2")
 		elif (top_sprite.get_current_animation() == "Attack2"):
 			top_sprite.play("Attack")
+		if playernumber == 0:
+			controller.change_face("Mean")
 
 func strong_attack():
 		attacking = true
@@ -318,24 +343,25 @@ func create_dust(type):
 	instance.set_global_pos(get_global_pos()+Vector2(0,32))
 	instance.set_scale(Vector2(1 - 2*sees_left,1))
 
-func _on_Hitbox_body_enter( body ):
-	if (body extends hurtful_class):
-		# Knockback some time maybe
-		if (not dead and vulnerable):
-			vulnerable = false
-			effects.play("Invulnerable")
-			controller.life_down()
-	elif (body extends killer_class):
-		if (not dead):
-			controller.life_down()
-			controller.life_down()
+func _on_Hitbox_body_enter( body ): #Collision
+	if playernumber == 0:
+		if (body extends hurtful_class):
+			# Knockback some time maybe
+			if (not dead and vulnerable):
+				vulnerable = false
+				effects.play("Invulnerable")
+				controller.life_down()
+		elif (body extends killer_class):
+			if (not dead):
+				controller.life_down()
+				controller.life_down()
 
-func death():
-	dead = true
+func death(): #Death Function
+	dead = true 
 	var map = controller.current_map
 	var instance = smoke_effects.instance()
-	map.add_child(instance)
-	get_node("/root/SoundManager").play_sfx("smoke",true)
+	map.add_child(instance) #Add smoke effects
+	get_node("/root/SoundManager").play_sfx("smoke",true) #Add sound effects
 	instance.play()
 	instance.set_global_pos(get_global_pos()-Vector2(0,16))
 	instance.set_scale(Vector2(1 - 2*sees_left,1))

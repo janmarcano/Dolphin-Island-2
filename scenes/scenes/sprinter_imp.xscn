@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resource_file type="PackedScene" subresource_count="19" version="1.1" version_name="Godot Engine v1.1.r1578.28-July-2015">
+	<ext_resource path="res://images/effects.png" type="Texture"></ext_resource>
+	<ext_resource path="res://images/runner.png" type="Texture"></ext_resource>
+	<ext_resource path="res://sounds/bigstep.smp" type="Sample"></ext_resource>
+	<resource type="GDScript" path="local://5">
+		<string name="script/source"> "&#000a;extends &quot;enemy.gd&quot;&#000a;&#000a;const R = 1&#000a;const L = -1&#000a;const MIN_TURN = 2&#000a;const MAX_TURN = 4&#000a;const IDLE = 0&#000a;const WAIT_IDLE = 1&#000a;const RUN = 2&#000a;const REST = 3&#000a;&#000a;var max_hp = 20&#000a;var state = IDLE&#000a;var turns = 0&#000a;var speed = 4&#000a;var active = false&#000a;var dead = false&#000a;var direction&#000a;var anim&#000a;var timer&#000a;var detect&#000a;var marker = preload(&quot;res://scenes/marker.gd&quot;)&#000a;&#000a;func _ready():&#000a;&#0009;hp = max_hp&#000a;&#0009;direction = R&#000a;&#0009;set_scale(Vector2(direction, 1))&#000a;&#0009;detect = get_node(&quot;Detect&quot;)&#000a;&#0009;anim = get_node(&quot;AnimationPlayer&quot;)&#000a;&#0009;timer = get_node(&quot;Timer&quot;)&#000a;&#000a;func _fixed_process(delta):&#000a;&#0009;if (active):&#000a;&#0009;&#0009;if (state == IDLE):&#000a;&#0009;&#0009;&#0009;turns = randi() % (MAX_TURN - MIN_TURN) + MIN_TURN&#000a;#&#0009;&#0009;&#0009;print(turns)&#000a;&#0009;&#0009;&#0009;state = WAIT_IDLE&#000a;&#0009;&#0009;&#0009;timer.start()&#000a;&#0009;&#0009;elif (state == RUN):&#000a;&#0009;&#0009;&#0009;var pos = get_pos() + Vector2(speed * direction, 0)&#000a;&#0009;&#0009;&#0009;set_pos(pos)&#000a;&#000a;func _on_Detect_body_enter( body ):&#000a;&#0009;if (body extends marker):&#000a;&#0009;&#0009;if (turns &lt; 0):&#000a;&#0009;&#0009;&#0009;direction *= -1&#000a;&#0009;&#0009;&#0009;set_scale(Vector2(direction, 1))&#000a;&#0009;&#0009;&#0009;turns -= 1&#000a;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;var ice = get_node(&quot;Icicles/AnimationPlayer&quot;)&#000a;&#0009;&#0009;&#0009;state = REST&#000a;&#0009;&#0009;&#0009;if (randi() % 2 == 0):&#000a;&#0009;&#0009;&#0009;&#0009;ice.play(&quot;OddAttack&quot;)&#000a;&#0009;&#0009;&#0009;else:&#000a;&#0009;&#0009;&#0009;&#0009;ice.play(&quot;EvenAttack&quot;)&#000a;&#0009;&#0009;&#0009;anim.play(&quot;Bump&quot;)&#000a;&#0009;&#0009;&#0009;anim.queue(&quot;Rest&quot;)&#000a;&#0009;&#0009;&#0009;timer.start()&#000a;&#000a;&#000a;func _on_Timer_timeout():&#000a;&#0009;if (state == WAIT_IDLE):&#000a;&#0009;&#0009;anim.play(&quot;Run&quot;)&#000a;&#0009;&#0009;state = RUN&#000a;&#0009;elif (state == REST):&#000a;&#0009;&#0009;anim.play(&quot;Idle&quot;)&#000a;&#0009;&#0009;state = IDLE&#000a;&#0009;&#0009;direction *= -1&#000a;&#0009;&#0009;set_scale(Vector2(direction, 1))&#000a;&#000a;func _death():&#000a;&#0009;active = false&#000a;&#0009;state = 99&#000a;&#0009;anim.play(&quot;Death&quot;)&#000a;&#0009;dead = true&#000a;&#0009;get_node(&quot;Hitbox&quot;).queue_free()&#000a;&#0009;get_node(&quot;Hurtbox&quot;).queue_free()&#000a;&#000a;func rumble():&#000a;&#0009;sound.play_sfx(&quot;rumble&quot;)&#000a;&#0009;&#000a;func shake():&#000a;&#0009;controller.is_shaking = true" </string>
+
+	</resource>
+	<resource type="Animation" path="local://17">
+		<string name="resource/name"> "OddAttack" </string>
+		<real name="length"> 1.5 </real>
+		<bool name="loop"> False </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "7:transform/pos" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -208, -160 </vector2>
+				<vector2> -208, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "value" </string>
+		<node_path name="tracks/1/path"> "3:transform/pos" </node_path>
+		<int name="tracks/1/interp"> 1 </int>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -80, -160 </vector2>
+				<vector2> -80, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/2/type"> "value" </string>
+		<node_path name="tracks/2/path"> "5:transform/pos" </node_path>
+		<int name="tracks/2/interp"> 1 </int>
+		<dictionary name="tracks/2/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -144, -160 </vector2>
+				<vector2> -144, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/3/type"> "value" </string>
+		<node_path name="tracks/3/path"> "1:transform/pos" </node_path>
+		<int name="tracks/3/interp"> 1 </int>
+		<dictionary name="tracks/3/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -16, -160 </vector2>
+				<vector2> -16, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/4/type"> "value" </string>
+		<node_path name="tracks/4/path"> "1:frame" </node_path>
+		<int name="tracks/4/interp"> 1 </int>
+		<dictionary name="tracks/4/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/5/type"> "value" </string>
+		<node_path name="tracks/5/path"> "3:frame" </node_path>
+		<int name="tracks/5/interp"> 1 </int>
+		<dictionary name="tracks/5/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/6/type"> "value" </string>
+		<node_path name="tracks/6/path"> "5:frame" </node_path>
+		<int name="tracks/6/interp"> 1 </int>
+		<dictionary name="tracks/6/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/7/type"> "value" </string>
+		<node_path name="tracks/7/path"> "7:frame" </node_path>
+		<int name="tracks/7/interp"> 1 </int>
+		<dictionary name="tracks/7/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/8/type"> "value" </string>
+		<node_path name="tracks/8/path"> "3/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/8/interp"> 1 </int>
+		<dictionary name="tracks/8/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/9/type"> "value" </string>
+		<node_path name="tracks/9/path"> "5/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/9/interp"> 1 </int>
+		<dictionary name="tracks/9/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/10/type"> "value" </string>
+		<node_path name="tracks/10/path"> "7/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/10/interp"> 1 </int>
+		<dictionary name="tracks/10/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/11/type"> "value" </string>
+		<node_path name="tracks/11/path"> "1/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/11/interp"> 1 </int>
+		<dictionary name="tracks/11/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://18">
+		<string name="resource/name"> "EvenAttack" </string>
+		<real name="length"> 1.5 </real>
+		<bool name="loop"> False </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "2:transform/pos" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -240, -160 </vector2>
+				<vector2> -240, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "value" </string>
+		<node_path name="tracks/1/path"> "4:transform/pos" </node_path>
+		<int name="tracks/1/interp"> 1 </int>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -112, -160 </vector2>
+				<vector2> -112, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/2/type"> "value" </string>
+		<node_path name="tracks/2/path"> "6:transform/pos" </node_path>
+		<int name="tracks/2/interp"> 1 </int>
+		<dictionary name="tracks/2/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -176, -160 </vector2>
+				<vector2> -176, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/3/type"> "value" </string>
+		<node_path name="tracks/3/path"> "8:transform/pos" </node_path>
+		<int name="tracks/3/interp"> 1 </int>
+		<dictionary name="tracks/3/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> -48, -160 </vector2>
+				<vector2> -48, -16 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/4/type"> "value" </string>
+		<node_path name="tracks/4/path"> "2:frame" </node_path>
+		<int name="tracks/4/interp"> 1 </int>
+		<dictionary name="tracks/4/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/5/type"> "value" </string>
+		<node_path name="tracks/5/path"> "4:frame" </node_path>
+		<int name="tracks/5/interp"> 1 </int>
+		<dictionary name="tracks/5/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/6/type"> "value" </string>
+		<node_path name="tracks/6/path"> "6:frame" </node_path>
+		<int name="tracks/6/interp"> 1 </int>
+		<dictionary name="tracks/6/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/7/type"> "value" </string>
+		<node_path name="tracks/7/path"> "8:frame" </node_path>
+		<int name="tracks/7/interp"> 1 </int>
+		<dictionary name="tracks/7/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="7"> 				0, 1, 1.1, 1.2, 1.3, 1.4, 1.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="7"> 				1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="7" shared="false">
+				<int> 48 </int>
+				<int> 49 </int>
+				<int> 50 </int>
+				<int> 51 </int>
+				<int> 52 </int>
+				<int> 53 </int>
+				<int> 54 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/8/type"> "value" </string>
+		<node_path name="tracks/8/path"> "2/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/8/interp"> 1 </int>
+		<dictionary name="tracks/8/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/9/type"> "value" </string>
+		<node_path name="tracks/9/path"> "4/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/9/interp"> 1 </int>
+		<dictionary name="tracks/9/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/10/type"> "value" </string>
+		<node_path name="tracks/10/path"> "6/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/10/interp"> 1 </int>
+		<dictionary name="tracks/10/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+		<string name="tracks/11/type"> "value" </string>
+		<node_path name="tracks/11/path"> "8/KinematicBody2D:transform/pos" </node_path>
+		<int name="tracks/11/interp"> 1 </int>
+		<dictionary name="tracks/11/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				1, 1.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<vector2> 0, 0 </vector2>
+				<vector2> 0, 32 </vector2>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="ConvexPolygonShape2D" path="local://15">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2_array name="points" len="4"> 			0, 7.78535, 6, 31.7854, -1, 55.7854, -6, 31.7854 </vector2_array>
+
+	</resource>
+	<resource type="GDScript" path="local://16">
+		<string name="script/source"> "&#000a;extends &quot;hurtful.gd&quot;&#000a;&#000a;&#000a;" </string>
+
+	</resource>
+	<resource type="RectangleShape2D" path="local://6">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 3, 3 </vector2>
+
+	</resource>
+	<resource type="Animation" path="local://4">
+		<string name="resource/name"> "Run" </string>
+		<real name="length"> 0.3 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.05 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="6"> 				0, 0.05, 0.1, 0.15, 0.2, 0.25 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="6" shared="false">
+				<int> 24 </int>
+				<int> 25 </int>
+				<int> 26 </int>
+				<int> 27 </int>
+				<int> 28 </int>
+				<int> 29 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "value" </string>
+		<node_path name="tracks/1/path"> "SamplePlayer:play/play" </node_path>
+		<int name="tracks/1/interp"> 2 </int>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="1"> 				0.3 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<string> "bigstep" </string>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://7">
+		<string name="resource/name"> "Idle" </string>
+		<real name="length"> 0.4 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="4"> 				0, 0.1, 0.2, 0.3 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="4"> 				1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="4" shared="false">
+				<int> 16 </int>
+				<int> 17 </int>
+				<int> 18 </int>
+				<int> 19 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://9">
+		<string name="resource/name"> "Bump" </string>
+		<real name="length"> 0.6 </real>
+		<bool name="loop"> False </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="6"> 				0, 0.1, 0.2, 0.3, 0.4, 0.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="6" shared="false">
+				<int> 32 </int>
+				<int> 33 </int>
+				<int> 34 </int>
+				<int> 35 </int>
+				<int> 36 </int>
+				<int> 37 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "method" </string>
+		<node_path name="tracks/1/path"> "." </node_path>
+		<int name="tracks/1/interp"> 1 </int>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "times" </string>
+			<real_array  len="6"> 				0, 0.1, 0.2, 0.3, 0.4, 0.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="6"> 				1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="6" shared="false">
+				<dictionary  shared="false">
+					<string> "args" </string>
+					<array  len="0" shared="false">
+					</array>
+					<string> "method" </string>
+					<string> "shake" </string>
+				</dictionary>
+				<dictionary  shared="false">
+					<string> "args" </string>
+					<array  len="0" shared="false">
+					</array>
+					<string> "method" </string>
+					<string> "shake" </string>
+				</dictionary>
+				<dictionary  shared="false">
+					<string> "args" </string>
+					<array  len="0" shared="false">
+					</array>
+					<string> "method" </string>
+					<string> "shake" </string>
+				</dictionary>
+				<dictionary  shared="false">
+					<string> "args" </string>
+					<array  len="0" shared="false">
+					</array>
+					<string> "method" </string>
+					<string> "shake" </string>
+				</dictionary>
+				<dictionary  shared="false">
+					<string> "args" </string>
+					<array  len="0" shared="false">
+					</array>
+					<string> "method" </string>
+					<string> "shake" </string>
+				</dictionary>
+				<dictionary  shared="false">
+					<string> "args" </string>
+					<array  len="0" shared="false">
+					</array>
+					<string> "method" </string>
+					<string> "shake" </string>
+				</dictionary>
+			</array>
+		</dictionary>
+		<string name="tracks/2/type"> "method" </string>
+		<node_path name="tracks/2/path"> "." </node_path>
+		<int name="tracks/2/interp"> 1 </int>
+		<dictionary name="tracks/2/keys" shared="false">
+			<string> "times" </string>
+			<real_array  len="1"> 				0 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<dictionary  shared="false">
+					<string> "args" </string>
+					<array  len="0" shared="false">
+					</array>
+					<string> "method" </string>
+					<string> "rumble" </string>
+				</dictionary>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://14">
+		<string name="resource/name"> "Death" </string>
+		<real name="length"> 1.2 </real>
+		<bool name="loop"> False </bool>
+		<real name="step"> 0.15 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="8"> 				0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="8"> 				1, 1, 1, 1, 1, 1, 1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="8" shared="false">
+				<int> 40 </int>
+				<int> 41 </int>
+				<int> 42 </int>
+				<int> 43 </int>
+				<int> 44 </int>
+				<int> 45 </int>
+				<int> 46 </int>
+				<int> 47 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://8">
+		<string name="resource/name"> "Rest" </string>
+		<real name="length"> 0.2 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "Sprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 0.1 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<int> 38 </int>
+				<int> 39 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="RectangleShape2D" path="local://11">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 7, 16 </vector2>
+
+	</resource>
+	<resource type="RectangleShape2D" path="local://12">
+		<real name="custom_solver_bias"> 0 </real>
+		<vector2 name="extents"> 6, 14 </vector2>
+
+	</resource>
+	<resource type="GDScript" path="local://13">
+		<string name="script/source"> "&#000a;extends &quot;hurtful.gd&quot;&#000a;&#000a;# member variables here, example:&#000a;# var a=2&#000a;# var b=&quot;textvar&quot;&#000a;&#000a;func _ready():&#000a;&#0009;# Initialization here&#000a;&#0009;pass&#000a;&#000a;&#000a;" </string>
+
+	</resource>
+	<resource type="SampleLibrary" path="local://19">
+		<dictionary name="samples/bigstep" shared="false">
+			<string> "db" </string>
+			<real> -6 </real>
+			<string> "pitch" </string>
+			<real> 0.75 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/bigstep.smp">  </resource>
+		</dictionary>
+
+	</resource>
+	<main_resource>
+		<dictionary name="_bundled" shared="false">
+			<string> "conn_count" </string>
+			<int> 2 </int>
+			<string> "conns" </string>
+			<int_array  len="12"> 				27, 0, 81, 80, 2, 0, 35, 0, 83, 82, 2, 0 </int_array>
+			<string> "names" </string>
+			<string_array  len="84">
+				<string> "Runner Imp" </string>
+				<string> "KinematicBody2D" </string>
+				<string> "z/z" </string>
+				<string> "input/pickable" </string>
+				<string> "collision/layers" </string>
+				<string> "collision/mask" </string>
+				<string> "collision/margin" </string>
+				<string> "script/script" </string>
+				<string> "__meta__" </string>
+				<string> "Icicles" </string>
+				<string> "Node2D" </string>
+				<string> "AnimationPlayer" </string>
+				<string> "playback/process_mode" </string>
+				<string> "playback/default_blend_time" </string>
+				<string> "root/root" </string>
+				<string> "anims/OddAttack" </string>
+				<string> "anims/EvenAttack" </string>
+				<string> "playback/active" </string>
+				<string> "playback/speed" </string>
+				<string> "blend_times" </string>
+				<string> "autoplay" </string>
+				<string> "1" </string>
+				<string> "Sprite" </string>
+				<string> "transform/pos" </string>
+				<string> "texture" </string>
+				<string> "vframes" </string>
+				<string> "hframes" </string>
+				<string> "frame" </string>
+				<string> "shapes/0/shape" </string>
+				<string> "shapes/0/transform" </string>
+				<string> "shapes/0/trigger" </string>
+				<string> "CollisionPolygon2D" </string>
+				<string> "build_mode" </string>
+				<string> "polygon" </string>
+				<string> "trigger" </string>
+				<string> "2" </string>
+				<string> "3" </string>
+				<string> "4" </string>
+				<string> "5" </string>
+				<string> "6" </string>
+				<string> "7" </string>
+				<string> "8" </string>
+				<string> "Detect" </string>
+				<string> "Area2D" </string>
+				<string> "visibility/visible" </string>
+				<string> "gravity_vec" </string>
+				<string> "gravity" </string>
+				<string> "linear_damp" </string>
+				<string> "angular_damp" </string>
+				<string> "CollisionShape2D" </string>
+				<string> "shape" </string>
+				<string> "flip_h" </string>
+				<string> "anims/Run" </string>
+				<string> "anims/Idle" </string>
+				<string> "anims/Bump" </string>
+				<string> "anims/Death" </string>
+				<string> "anims/Rest" </string>
+				<string> "Hitbox" </string>
+				<string> "Hurtbox" </string>
+				<string> "Shape2d" </string>
+				<string> "Timer" </string>
+				<string> "process_mode" </string>
+				<string> "wait_time" </string>
+				<string> "one_shot" </string>
+				<string> "autostart" </string>
+				<string> "SamplePlayer" </string>
+				<string> "config/voices" </string>
+				<string> "config/samples" </string>
+				<string> "default/volume_db" </string>
+				<string> "default/pitch_scale" </string>
+				<string> "default/pan" </string>
+				<string> "default/depth" </string>
+				<string> "default/height" </string>
+				<string> "default/filter/type" </string>
+				<string> "default/filter/cutoff" </string>
+				<string> "default/filter/resonance" </string>
+				<string> "default/filter/gain" </string>
+				<string> "default/reverb_room" </string>
+				<string> "default/reverb_send" </string>
+				<string> "default/chorus_send" </string>
+				<string> "_on_Detect_body_enter" </string>
+				<string> "body_enter" </string>
+				<string> "_on_Timer_timeout" </string>
+				<string> "timeout" </string>
+			</string_array>
+			<string> "node_count" </string>
+			<int> 37 </int>
+			<string> "nodes" </string>
+			<int_array  len="751"> 				-1, -1, 1, 0, -1, 7, 2, 0, 3, 1, 4, 0, 5, 0, 6, 2, 7, 3, 8, 4, 0, 0, 0, 10, 9, -1, 2, 2, 5, 8, 6, 0, 1, 0, 11, 11, -1, 9, 12, 0, 13, 7, 14, 8, 15, 9, 16, 10, 17, 11, 18, 12, 19, 13, 20, 14, 0, 1, 0, 22, 21, -1, 6, 23, 15, 24, 16, 25, 17, 26, 17, 27, 18, 8, 19, 0, 3, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 4, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 1, 0, 22, 35, -1, 6, 23, 27, 24, 16, 25, 17, 26, 17, 27, 18, 8, 28, 0, 6, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 7, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 1, 0, 22, 36, -1, 6, 23, 29, 24, 16, 25, 17, 26, 17, 27, 18, 8, 30, 0, 9, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 10, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 1, 0, 22, 37, -1, 6, 23, 31, 24, 16, 25, 17, 26, 17, 27, 18, 8, 32, 0, 12, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 13, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 1, 0, 22, 38, -1, 6, 23, 33, 24, 16, 25, 17, 26, 17, 27, 18, 8, 34, 0, 15, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 16, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 1, 0, 22, 39, -1, 6, 23, 35, 24, 16, 25, 17, 26, 17, 27, 18, 8, 36, 0, 18, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 19, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 1, 0, 22, 40, -1, 6, 23, 37, 24, 16, 25, 17, 26, 17, 27, 18, 8, 38, 0, 21, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 22, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 1, 0, 22, 41, -1, 6, 23, 39, 24, 16, 25, 17, 26, 17, 27, 18, 8, 40, 0, 24, 0, 1, 1, -1, 9, 23, 20, 3, 1, 28, 21, 29, 22, 30, 11, 4, 0, 5, 0, 6, 2, 7, 23, 0, 25, 0, 31, 31, -1, 4, 23, 24, 32, 25, 33, 26, 34, 11, 0, 0, 0, 43, 42, -1, 11, 44, 1, 23, 41, 3, 11, 28, 42, 29, 43, 30, 1, 45, 44, 46, 45, 47, 46, 48, 12, 8, 47, 0, 27, 0, 49, 49, -1, 2, 50, 42, 34, 1, 0, 0, 0, 22, 22, -1, 6, 23, 48, 24, 49, 51, 11, 25, 17, 26, 17, 27, 50, 0, 0, 0, 11, 11, -1, 12, 12, 0, 13, 7, 14, 8, 52, 51, 53, 52, 54, 53, 55, 54, 56, 55, 17, 11, 18, 12, 19, 13, 20, 56, 0, 0, 0, 43, 57, -1, 10, 44, 1, 3, 11, 28, 57, 29, 58, 30, 1, 45, 44, 46, 45, 47, 46, 48, 12, 8, 59, 0, 31, 0, 49, 49, -1, 3, 23, 60, 50, 57, 34, 1, 0, 0, 0, 1, 58, -1, 11, 44, 1, 23, 61, 3, 1, 28, 62, 29, 63, 30, 11, 4, 0, 5, 0, 6, 2, 7, 64, 8, 65, 0, 33, 0, 49, 59, -1, 3, 23, 66, 50, 62, 34, 11, 0, 0, 0, 60, 60, -1, 4, 61, 0, 62, 67, 63, 1, 64, 1, 0, 0, 0, 65, 65, -1, 14, 66, 68, 67, 69, 68, 7, 69, 12, 70, 7, 71, 7, 72, 7, 73, 70, 74, 70, 75, 70, 76, 70, 77, 68, 78, 7, 79, 7, 0 </int_array>
+			<string> "variants" </string>
+			<array  len="71" shared="false">
+				<int> 1 </int>
+				<bool> False </bool>
+				<real> 0.08 </real>
+				<resource  resource_type="Script" path="local://5">  </resource>
+				<dictionary  shared="false">
+					<string> "__editor_plugin_screen__" </string>
+					<string> "Script" </string>
+					<string> "__editor_plugin_states__" </string>
+					<dictionary  shared="false">
+						<string> "2D" </string>
+						<dictionary  shared="false">
+							<string> "ofs" </string>
+							<vector2> -75.0754, -41.8205 </vector2>
+							<string> "snap_grid" </string>
+							<bool> True </bool>
+							<string> "snap_offset" </string>
+							<vector2> 0, 0 </vector2>
+							<string> "snap_pixel" </string>
+							<bool> True </bool>
+							<string> "snap_relative" </string>
+							<bool> False </bool>
+							<string> "snap_rotation" </string>
+							<bool> False </bool>
+							<string> "snap_rotation_offset" </string>
+							<real> 0 </real>
+							<string> "snap_rotation_step" </string>
+							<real> 0.261799 </real>
+							<string> "snap_show_grid" </string>
+							<bool> False </bool>
+							<string> "snap_step" </string>
+							<vector2> 16, 16 </vector2>
+							<string> "zoom" </string>
+							<real> 8.622011 </real>
+						</dictionary>
+						<string> "3D" </string>
+						<dictionary  shared="false">
+							<string> "ambient_light_color" </string>
+							<color> 0.15, 0.15, 0.15, 1 </color>
+							<string> "default_light" </string>
+							<bool> True </bool>
+							<string> "default_srgb" </string>
+							<bool> False </bool>
+							<string> "deflight_rot_x" </string>
+							<real> 0.942478 </real>
+							<string> "deflight_rot_y" </string>
+							<real> 0.628319 </real>
+							<string> "fov" </string>
+							<real> 45 </real>
+							<string> "show_grid" </string>
+							<bool> True </bool>
+							<string> "show_origin" </string>
+							<bool> True </bool>
+							<string> "viewport_mode" </string>
+							<int> 1 </int>
+							<string> "viewports" </string>
+							<array  len="4" shared="false">
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> True </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+								<dictionary  shared="false">
+									<string> "distance" </string>
+									<real> 4 </real>
+									<string> "listener" </string>
+									<bool> False </bool>
+									<string> "pos" </string>
+									<vector3> 0, 0, 0 </vector3>
+									<string> "use_environment" </string>
+									<bool> False </bool>
+									<string> "use_orthogonal" </string>
+									<bool> False </bool>
+									<string> "x_rot" </string>
+									<real> 0 </real>
+									<string> "y_rot" </string>
+									<real> 0 </real>
+								</dictionary>
+							</array>
+							<string> "zfar" </string>
+							<real> 500 </real>
+							<string> "znear" </string>
+							<real> 0.1 </real>
+						</dictionary>
+					</dictionary>
+					<string> "__editor_run_settings__" </string>
+					<dictionary  shared="false">
+						<string> "custom_args" </string>
+						<string> "-l $scene" </string>
+						<string> "run_mode" </string>
+						<int> 0 </int>
+					</dictionary>
+					<string> "_edit_group_" </string>
+					<bool> True </bool>
+				</dictionary>
+				<int> -3 </int>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<real> 0 </real>
+				<node_path> ".." </node_path>
+				<resource  resource_type="Animation" path="local://17">  </resource>
+				<resource  resource_type="Animation" path="local://18">  </resource>
+				<bool> True </bool>
+				<real> 1 </real>
+				<array  len="0" shared="false">
+				</array>
+				<string> "" </string>
+				<vector2> -16, -16 </vector2>
+				<resource  resource_type="Texture" path="res://images/effects.png">  </resource>
+				<int> 8 </int>
+				<int> 54 </int>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> 0, 32 </vector2>
+				<resource  resource_type="Shape2D" path="local://15">  </resource>
+				<matrix32> 1, -0, 0, 1, 0, -15.7854 </matrix32>
+				<resource  resource_type="Script" path="local://16">  </resource>
+				<vector2> 0, -15.7854 </vector2>
+				<int> 0 </int>
+				<vector2_array  len="4"> 					0, 7.78535, -6, 31.7854, -1, 55.7854, 6, 31.7854 </vector2_array>
+				<vector2> -240, -16 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> -80, -16 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> -112, -16 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> -144, -16 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> -176, -16 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> -208, -16 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> -48, -16 </vector2>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> 10, -7 </vector2>
+				<resource  resource_type="Shape2D" path="local://6">  </resource>
+				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<vector2> 0, 1 </vector2>
+				<real> 98 </real>
+				<real> 0.1 </real>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> 0, -8 </vector2>
+				<resource  resource_type="Texture" path="res://images/runner.png">  </resource>
+				<int> 25 </int>
+				<resource  resource_type="Animation" path="local://4">  </resource>
+				<resource  resource_type="Animation" path="local://7">  </resource>
+				<resource  resource_type="Animation" path="local://9">  </resource>
+				<resource  resource_type="Animation" path="local://14">  </resource>
+				<resource  resource_type="Animation" path="local://8">  </resource>
+				<string> "Idle" </string>
+				<resource  resource_type="Shape2D" path="local://11">  </resource>
+				<matrix32> 1, -0, 0, 1, 1, -16 </matrix32>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> 1, -16 </vector2>
+				<vector2> -1, -8 </vector2>
+				<resource  resource_type="Shape2D" path="local://12">  </resource>
+				<matrix32> 1, -0, 0, 1, 2, -6 </matrix32>
+				<resource  resource_type="Script" path="local://13">  </resource>
+				<dictionary  shared="false">
+					<string> "_editor_collapsed" </string>
+					<bool> True </bool>
+				</dictionary>
+				<vector2> 2, -6 </vector2>
+				<real> 1.5 </real>
+				<int> 2 </int>
+				<resource  resource_type="SampleLibrary" path="local://19">  </resource>
+				<nil>  </nil>
+			</array>
+			<string> "version" </string>
+			<int> 1 </int>
+		</dictionary>
+
+	</main_resource>
+</resource_file>

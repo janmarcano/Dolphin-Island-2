@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://scenes/player.res" type="PackedScene" id=1]
+
+[node name="Players" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+editor/display_folded = true
+playernumber = 0
+playercolor = Color( 0, 0, 0, 1 )
+
+[node name="Player1" parent="." instance=ExtResource( 1 )]
+
+editor/display_folded = true
+playernumber = 1
+playercolor = Color( 0.394775, 0.536367, 0.574219, 1 )
+
+
