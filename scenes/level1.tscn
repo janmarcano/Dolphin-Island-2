@@ -1,0 +1,122 @@
+[gd_scene load_steps=14 format=1]
+
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/checkpoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/anchor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/l1_iciclepit.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/l1_entrance.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/l1_impmix.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/l1_magestairs.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/l1_arenasplit.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/l1_bossroom.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/l1_classmates.tscn" type="PackedScene" id=10]
+[ext_resource path="res://images/snowbg3.png" type="Texture" id=11]
+[ext_resource path="res://images/snowbg2.png" type="Texture" id=12]
+[ext_resource path="res://images/snowbg1.png" type="Texture" id=13]
+
+[node name="Level1" type="Node2D"]
+
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( -48, 272 )
+
+[node name="Checkpoint1" parent="Checkpoints" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 1984, 240 )
+id = 1
+
+[node name="Teleports" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="CameraAnchor" parent="Teleports" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -32, 272 )
+
+[node name="IciclePit" parent="." instance=ExtResource( 4 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 192, -240 )
+
+[node name="Entrance" parent="." instance=ExtResource( 5 )]
+
+editor/display_folded = true
+transform/pos = Vector2( 64, 144 )
+
+[node name="ImpMix" parent="." instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1040, 160 )
+
+[node name="Mage Stairs" parent="." instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 1904, 112 )
+
+[node name="Arena Split" parent="." instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 912, -272 )
+
+[node name="Boss Room" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( -320, -176 )
+
+[node name="Classmate" parent="." instance=ExtResource( 10 )]
+
+transform/pos = Vector2( -768, -176 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = true
+
+[node name="Third" type="ParallaxLayer" parent="ParallaxBackground"]
+
+motion/scale = Vector2( 0.1, 0.05 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Third"]
+
+transform/pos = Vector2( 240, 56 )
+texture = ExtResource( 11 )
+region_rect = Rect2( 0, 0, 1000, 120 )
+
+[node name="Second" type="ParallaxLayer" parent="ParallaxBackground"]
+
+motion/scale = Vector2( 0.4, 0.1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Second"]
+
+transform/pos = Vector2( 240, 56 )
+texture = ExtResource( 12 )
+
+[node name="First" type="ParallaxLayer" parent="ParallaxBackground"]
+
+motion/scale = Vector2( 0.8, 0.15 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/First"]
+
+transform/pos = Vector2( 240, 56 )
+texture = ExtResource( 13 )
+
+

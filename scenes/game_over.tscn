@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://other/ingame.fnt" type="BitmapFont" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "
+extends Polygon2D
+
+# member variables here, example:
+# var a=2
+# var b=\"textvar\"
+
+func _ready():
+	set_fixed_process(true)
+	pass
+
+func _fixed_process(delta):
+	get_node(\"/root/Controller\").ui.hide()
+	get_node(\"/root/Controller\").ui.set_opacity(0)"
+
+[node name="Polygon2D" type="Polygon2D"]
+
+polygon = Vector2Array( 0, 0, 0, 192, 336, 192, 336, 0 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+script/script = SubResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 96.0
+margin/top = 96.0
+margin/right = 221.0
+margin/bottom = 109.0
+custom_fonts/font = ExtResource( 1 )
+text = "PRESS ESC TO EXIT"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

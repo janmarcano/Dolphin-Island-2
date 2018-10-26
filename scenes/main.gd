@@ -1,10 +1,10 @@
 
 extends Node2D
 
-const map_names = { "res://scenes/title_screen.xscn":"title", 
-					"res://scenes/tutorial.xscn":"tutorial", 
-					"res://scenes/level1.xscn":"level1",
-					"res://scenes/game_over.xscn":"gameover", }
+const map_names = { "res://scenes/title_screen.tscn":"title", 
+					"res://scenes/tutorial.tscn":"tutorial", 
+					"res://scenes/level1.tscn":"level1",
+					"res://scenes/game_over.tscn":"gameover", }
 const map_songs = {	"level1":"res://sounds/snow.ogg",
 					"tutorial":null,
 					"title":"res://sounds/undine.ogg",
@@ -19,7 +19,7 @@ var tcp
 func _ready():
 	c = get_node("/root/Controller")
 	load_timer = get_node("LoadTimer")
-	change_map("res://scenes/title_screen.xscn", 0)
+	change_map("res://scenes/title_screen.tscn", 0)
 	
 func _on_Timer_timeout():
 	c.life_up()

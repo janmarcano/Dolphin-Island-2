@@ -39,8 +39,8 @@ var killer_class = preload("res://scenes/killer.gd")
 var enemy_class = preload("res://scenes/enemy.gd")
 export var vulnerable = true
 var knockback = false
-var sword_hit = preload("res://scenes/sword_hit.scn")
-var strong_hit = preload("res://scenes/strong_slash.xscn")
+var sword_hit = preload("res://scenes/sword_hit.tscn")
+var strong_hit = preload("res://scenes/strong_slash.tscn")
 var attack_spot
 export var create_sword = false
 var aspd
@@ -51,11 +51,11 @@ var top_sprite
 var bot_sprite
 var effects
 export var need_synchro = false
-var dust = preload("res://scenes/dust.scn")
+var dust = preload("res://scenes/dust.tscn")
 var landed = false
 var stopped = false
 # Death
-var smoke_effects = preload("res://scenes/smoke_effects.scn")
+var smoke_effects = preload("res://scenes/smoke_effects.tscn")
 var dead = false
 # Sounds
 var sfx

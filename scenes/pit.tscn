@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 60, 2 )
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "
+extends Area2D
+
+var player_class = preload(\"res://scenes/player.gd\")
+
+func _ready():
+	# Initialization here
+	pass
+
+
+
+
+func _on_Area2D_body_enter( body ):
+	if (body extends player_class):
+		get_node(\"/root/Controller\").cam_target = self
+"
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "
+extends \"killer.gd\"
+
+"
+
+[node name="Pit" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 2 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+transform/pos = Vector2( 0, 110 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = SubResource( 3 )
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="KinematicBody2D"]
+
+shape = SubResource( 1 )
+trigger = true
+_update_shape_index = -1
+
+[connection signal="body_enter" from="." to="." method="_on_Area2D_body_enter"]
+
+

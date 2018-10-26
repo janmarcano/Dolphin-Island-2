@@ -1,0 +1,540 @@
+[gd_scene load_steps=24 format=1]
+
+[ext_resource path="res://scenes/overlay.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/outer.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/stone.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/checkpoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://images/mobsheet.png" type="Texture" id=6]
+[ext_resource path="res://sounds/mage_shoot.smp" type="Sample" id=7]
+[ext_resource path="res://scenes/anchor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/teleport.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/marker.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/worm.tscn" type="PackedScene" id=11]
+[ext_resource path="res://images/tileset.png" type="Texture" id=12]
+[ext_resource path="res://images/hubbg3.png" type="Texture" id=13]
+[ext_resource path="res://images/hubbg2.png" type="Texture" id=14]
+[ext_resource path="res://images/hubbg1.png" type="Texture" id=15]
+
+
+
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 92, 2 )
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "
+extends \"cutscene.gd\"
+
+# member variables here, example:
+# var a=2
+# var b=\"textvar\"
+
+func _ready():
+	text = [\"[Sora]: You're inside. \\nTry to get used to this digital form.\",
+			\"[Aisha]: Sweet outfit. \\nI even got a badass sword!\", 
+			\"[Sora]: Haha. Don't get so excited. \\nGo take a look around.\"]
+	check = \"TutorialIntro\"
+	pass
+
+
+"
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2, 128 )
+
+[sub_resource type="GDScript" id=4]
+
+script/source = "
+extends \"cutscene.gd\"
+
+var bullet = preload(\"res://scenes/bullet.tscn\")
+
+func _ready():
+	if (controller.checkpoint == 1):
+		hide()
+	else:
+		show()
+	text = [\"[Sora]: That was close, I was able to set \\n up a shield for you before you went in.\",
+			\"[Sora]: It'll only withstand a single attack, \\nbut it'll regenerate over time.\", 
+			\"[Sora]: Please remember this!\"]
+	check = \"TutorialLifeforce\"
+	pass
+
+func _on_Area2D_body_enter( body ):
+	if (body extends player_class):
+		show()
+		var test = get_node(\"/root/Progress\").checks
+		if (check == null or (check != null and not test[check])):
+			if (cutscene):
+				controller.begin_cutscene()
+			if (check != null):
+				test[check] = true
+			controller.cam_target = self
+			get_node(\"Timer\").start()
+			set_fixed_process(true)
+
+func _fixed_process(delta):
+	if (!controller.cutscene):
+		camera()
+		set_fixed_process(false)
+
+func shoot():
+	get_node(\"Position2D\").add_child(bullet.instance())
+
+func text():
+	get_node(\"AnimationPlayer\")
+	controller.show_text(text)
+
+func camera():
+	get_node(\"AnimationPlayer\").play(\"Teleport\")
+	controller.cam_target = controller.player
+
+func _on_Timer_timeout():
+	var anim = get_node(\"AnimationPlayer\")
+	anim.play(\"Shoot\")
+	anim.queue(\"Idle\")"
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "Idle"
+length = 0.8
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 2
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+
+resource/name = "Shoot"
+length = 0.8
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 36, 37, 38, 39 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.7 ),
+"transitions": FloatArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot"
+}, {
+"args": [  ],
+"method": "text"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("SamplePlayer:play/play")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ "mage_shoot" ]
+}
+
+[sub_resource type="Animation" id=7]
+
+length = 0.7
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 2
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.7 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="SampleLibrary" id=8]
+
+samples/mage_shoot = {
+"db": -12.0,
+"pitch": 0.9,
+"priority": 0,
+"sample": ExtResource( 7 )
+}
+
+[node name="Node2D" type="Node2D"]
+
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="Overlay" type="TileMap" parent="."]
+
+transform/pos = Vector2( 0, 8 )
+z/z = 3
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 917520, 0, 917521, 4, 917522, 0, 917523, 2, 917524, 0, 917525, 0, 917526, 3, 917527, 2, 917528, 0, 1179643, 1, 1179646, 2, 1179647, 3, 1114124, 5, 1114126, 1, 1114137, 0, 1114138, 2, 1114139, 5, 1114140, 0, 1114141, 0, 1114142, 1, 1114143, 1, 1114144, 5, 1114145, 0, 1114146, 0, 1114147, 2, 1114148, 0, 1114149, 4, 1114150, 1, 1114151, 0, 1114152, 3, 1114153, 1, 1114154, 1, 1114155, 1, 1114156, 0, 1114160, 2, 1245184, 4, 1245185, 0, 1245186, 1, 1245187, 3, 1245188, 0, 1245189, 0, 1245190, 2, 1245191, 0, 1245192, 1, 1245193, 0, 1245194, 4, 1245195, 0, 1441879, 10, 1441880, 9, 1441881, 9, 1441885, 10, 1441886, 9, 1441887, 10, 1441888, 9, 1507412, 9, 1507413, 9, 1572929, 8, 1572930, 1, 1572944, 10, 1638461, 0, 1638462, 2, 1703981, 6, 1703982, 0, 1703984, 1, 1703985, 2, 1703988, 0, 1703989, 0, 1703990, 1, 1703994, 0, 1703995, 7 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+
+editor/display_folded = true
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -11, 3, 65525, 3, 131061, 3, 196597, 3, 262133, 3, 327669, 10, 327670, 5, 393206, 3, 458742, 3, 393265, 4, 393266, 0, 393267, 0, 393268, 0, 393269, 0, 393270, 0, 393271, 0, 393272, 0, 393273, 0, 393274, 0, 393275, 0, 393276, 0, 393277, 5, 524278, 10, 524279, 5, 458800, 4, 458801, 11, 458813, 3, 458838, 2, 589815, 10, 589816, 5, 524336, 2, 524349, 10, 524350, 5, 524374, 2, 655352, 10, 655353, 5, 589872, 2, 589886, 10, 589887, 0, 589888, 5, 589910, 2, 720889, 3, 655408, 2, 655424, 3, 655446, 2, 786425, 10, 786426, 5, 720944, 2, 720960, 3, 720982, 2, 851962, 3, 786480, 6, 786481, 9, 786496, 3, 786518, 2, 917498, 3, 852017, 2, 852032, 3, 852054, 2, 983034, 3, 917553, 2, 917568, 3, 917590, 2, 1048570, 3, 983055, 4, 983056, 0, 983057, 0, 983058, 0, 983059, 0, 983060, 0, 983061, 0, 983062, 0, 983063, 0, 983064, 5, 983089, 2, 983104, 3, 983126, 6, 983127, 1, 983128, 9, 1114106, 3, 1048591, 2, 1048600, 3, 1048625, 2, 1048640, 3, 1048664, 6, 1048665, 9, 1179642, 3, 1114127, 2, 1114136, 3, 1114161, 2, 1114176, 3, 1114201, 2, 1245178, 3, 1179663, 2, 1179672, 10, 1179673, 0, 1179674, 0, 1179675, 0, 1179676, 0, 1179677, 0, 1179678, 0, 1179679, 0, 1179680, 0, 1179681, 0, 1179682, 0, 1179683, 0, 1179684, 0, 1179685, 0, 1179686, 0, 1179687, 0, 1179688, 0, 1179689, 0, 1179690, 0, 1179691, 0, 1179692, 5, 1179696, 4, 1179697, 11, 1179712, 3, 1179737, 6, 1179738, 1, 1179739, 1, 1179740, 1, 1179741, 1, 1179742, 1, 1179743, 1, 1179744, 1, 1179745, 1, 1179746, 1, 1310714, 3, 1245199, 2, 1245228, 3, 1245232, 2, 1245247, 8, 1245248, 7, 1376250, 10, 1376251, 0, 1376252, 0, 1376253, 0, 1376254, 0, 1376255, 0, 1310720, 0, 1310721, 0, 1310722, 0, 1310723, 0, 1310724, 0, 1310725, 0, 1310726, 0, 1310727, 0, 1310728, 0, 1310729, 0, 1310730, 0, 1310731, 0, 1310732, 0, 1310733, 0, 1310734, 0, 1310735, 11, 1310764, 3, 1310768, 2, 1310781, 8, 1310782, 1, 1310783, 7, 1376300, 3, 1376304, 2, 1376314, 8, 1376315, 1, 1376316, 1, 1376317, 7, 1441836, 3, 1441840, 6, 1441841, 9, 1441849, 8, 1441850, 7, 1507372, 3, 1507377, 6, 1507378, 1, 1507379, 1, 1507380, 1, 1507381, 1, 1507382, 1, 1507383, 1, 1507384, 1, 1507385, 7, 1507415, 4, 1507416, 0, 1507417, 0, 1507418, 0, 1507419, 0, 1507420, 0, 1507421, 0, 1507422, 0, 1507423, 0, 1507424, 0, 1507425, 0, 1507426, 0, 1572906, 8, 1572907, 1, 1572908, 7, 1572931, 4, 1572932, 0, 1572933, 0, 1572934, 0, 1572935, 0, 1572936, 0, 1572937, 0, 1572938, 0, 1572939, 0, 1572940, 5, 1572947, 4, 1572948, 0, 1572949, 0, 1572950, 0, 1572951, 11, 1638442, 3, 1638443, 1, 1638444, 1, 1638463, 4, 1638464, 0, 1638465, 0, 1638466, 0, 1638467, 11, 1638476, 10, 1638477, 0, 1638478, 0, 1638479, 0, 1638480, 0, 1638481, 0, 1638482, 0, 1638483, 11, 1703978, 3, 1703979, 1, 1703980, 1, 1703996, 4, 1703997, 0, 1703998, 0, 1703999, 11, 1769514, 10, 1769515, 0, 1769516, 0, 1769517, 0, 1769518, 0, 1769519, 0, 1769520, 0, 1769521, 0, 1769522, 0, 1769523, 0, 1769524, 0, 1769525, 0, 1769526, 0, 1769527, 0, 1769528, 0, 1769529, 0, 1769530, 0, 1769531, 0, 1769532, 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( -176, -16, -320, -16, -320, 624, 1728, 624, 1728, 96, 1392, 96, 1392, 240, 1424, 240, 1424, 256, 1440, 256, 1440, 288, 1584, 288, 1584, 384, 1408, 384, 1408, 400, 1344, 400, 1344, 416, 1216, 416, 1216, 400, 1088, 400, 1088, 416, 1024, 416, 1024, 432, 976, 432, 976, 448, 672, 448, 672, 384, 704, 384, 704, 304, 384, 304, 384, 256, 256, 256, 256, 336, -96, 336, -96, 192, -112, 192, -112, 160, -128, 160, -128, 144, -144, 144, -144, 128, -160, 128, -160, 80, -176, 80 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Polygon2D1" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( 800, 112, 800, 128, 784, 128, 784, 192, 800, 192, 800, 304, 784, 304, 784, 352, 800, 352, 800, 368, 912, 368, 912, 352, 928, 352, 928, 336, 976, 336, 976, 320, 1008, 320, 1008, 304, 1024, 304, 1024, 160, 992, 160, 992, 144, 976, 144, 976, 112 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Stone" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 3 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 1114137, 11, 1245179, 11, 1245180, 8, 1245181, 10, 1245182, 11, 1245183, 11, 1179660, 12, 1179661, 11, 1179662, 11, 1310715, 8, 1310716, 10, 1310717, 11, 1310718, 11, 1310719, 11, 1245196, 14, 1245197, 11, 1245198, 11, 1376298, 11 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+
+editor/display_folded = true
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 5 )]
+
+visibility/visible = false
+transform/pos = Vector2( -48, 288 )
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 688, 288 )
+id = 1
+
+[node name="Events" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Intro" type="Area2D" parent="Events"]
+
+editor/display_folded = true
+transform/pos = Vector2( 66, 288 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 29, 22 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Intro"]
+
+transform/pos = Vector2( 29, 22 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Lifeforce" type="Area2D" parent="Events"]
+
+editor/display_folded = true
+transform/pos = Vector2( 608, 272 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -80, -74 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Events/Lifeforce"]
+
+transform/pos = Vector2( -80, -74 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Sprite" type="Sprite" parent="Events/Lifeforce"]
+
+transform/pos = Vector2( 16, 8 )
+texture = ExtResource( 6 )
+vframes = 8
+hframes = 8
+frame = 32
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Events/Lifeforce"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Idle = SubResource( 5 )
+anims/Shoot = SubResource( 6 )
+anims/Teleport = SubResource( 7 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "Idle"
+
+[node name="Position2D" type="Position2D" parent="Events/Lifeforce"]
+
+transform/pos = Vector2( 12, 5 )
+
+[node name="Timer" type="Timer" parent="Events/Lifeforce"]
+
+process_mode = 1
+wait_time = 0.75
+one_shot = true
+autostart = false
+
+[node name="SamplePlayer" type="SamplePlayer" parent="Events/Lifeforce"]
+
+config/polyphony = 1
+config/samples = SubResource( 8 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 0.0
+default/filter/resonance = 0.0
+default/filter/gain = 0.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[node name="CameraAnchor" parent="Events" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( -16, 272 )
+
+[node name="CameraAnchor1" parent="Events" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 1424, 368 )
+transform/scale = Vector2( -1, 1 )
+
+[node name="Teleport" parent="Events" instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 1568, 336 )
+level = "level1"
+
+[node name="Enemies" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Marker" parent="Enemies" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 768, 432 )
+
+[node name="Marker1" parent="Enemies" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 943, 432 )
+
+[node name="Worm" parent="Enemies" instance=ExtResource( 11 )]
+
+transform/pos = Vector2( 824, 432 )
+
+[node name="Worm1" parent="Enemies" instance=ExtResource( 11 )]
+
+transform/pos = Vector2( 896, 432 )
+
+[node name="Blocks" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Sprite" type="Sprite" parent="Blocks"]
+
+transform/pos = Vector2( -16, 304 )
+texture = ExtResource( 12 )
+vframes = 8
+hframes = 8
+frame = 43
+
+[node name="Sprite1" type="Sprite" parent="Blocks"]
+
+transform/pos = Vector2( 224, 304 )
+texture = ExtResource( 12 )
+vframes = 8
+hframes = 8
+frame = 44
+
+[node name="Sprite2" type="Sprite" parent="Blocks"]
+
+transform/pos = Vector2( 704, 416 )
+texture = ExtResource( 12 )
+vframes = 8
+hframes = 8
+frame = 45
+
+[node name="ParallaxLayer" type="ParallaxBackground" parent="."]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = true
+
+[node name="Third" type="ParallaxLayer" parent="ParallaxLayer"]
+
+motion/scale = Vector2( 0.1, 0 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer/Third"]
+
+transform/pos = Vector2( 240, 96 )
+texture = ExtResource( 13 )
+
+[node name="Second" type="ParallaxLayer" parent="ParallaxLayer"]
+
+motion/scale = Vector2( 0.4, 0.1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer/Second"]
+
+transform/pos = Vector2( 240, 96 )
+texture = ExtResource( 14 )
+
+[node name="First" type="ParallaxLayer" parent="ParallaxLayer"]
+
+motion/scale = Vector2( 0.8, 0.3 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer/First"]
+
+transform/pos = Vector2( 240, 144 )
+texture = ExtResource( 15 )
+
+[connection signal="timeout" from="Events/Lifeforce/Timer" to="Events/Lifeforce" method="_on_Timer_timeout"]
+
+

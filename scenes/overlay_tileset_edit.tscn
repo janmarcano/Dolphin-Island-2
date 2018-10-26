@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://images/tileset.png" type="Texture" id=1]
+
+[node name="Tilemap" type="Node2D"]
+
+transform/pos = Vector2( 8, 8 )
+__meta__ = {
+"__editor_plugin_screen__": "2D",
+"_edit_lock_": true
+}
+
+[node name="Grass" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 80, 8, 16, 16 )
+
+[node name="Grass1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 0 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 86, 8, 16, 16 )
+
+[node name="Grass2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 112, 8, 16, 16 )
+
+[node name="Grass3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 96, 0 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 128, 8, 16, 16 )
+
+[node name="Grass4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 144, 8, 16, 16 )
+
+[node name="Grass5" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 160, 8, 16, 16 )
+
+[node name="Grass6" type="Sprite" parent="."]
+
+transform/pos = Vector2( 64, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 176, 8, 16, 16 )
+
+[node name="Grass7" type="Sprite" parent="."]
+
+transform/pos = Vector2( 96, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 192, 8, 16, 16 )
+
+[node name="Grass8" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 64 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 208, 8, 16, 16 )
+
+[node name="Snow" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 64 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 224, 8, 16, 16 )
+
+[node name="Snow1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 64, 64 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 240, 8, 16, 16 )
+
+

@@ -1,0 +1,558 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://images/tileset.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=12]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=7]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=11]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=8]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[node name="Tilemap" type="Node2D"]
+
+transform/pos = Vector2( 8, 8 )
+__meta__ = {
+"__editor_plugin_screen__": "2D",
+"_edit_lock_": true
+}
+
+[node name="Snow top1" type="Sprite" parent="."]
+
+editor/display_folded = true
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 208, 192, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow top1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 12 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow top1/StaticBody2D"]
+
+shape = SubResource( 12 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow bot1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 32, 0 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 208, 224, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow bot1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow bot1/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow left1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 64, 0 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 192, 206, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow left1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow left1/StaticBody2D"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow right1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 96, 0 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 224, 206, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow right1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow right1/StaticBody2D"]
+
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow topleft1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 0, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 192, 192, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow topleft1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow topleft1/StaticBody2D"]
+
+shape = SubResource( 4 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow topright1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 224, 192, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow topright1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow topright1/StaticBody2D"]
+
+shape = SubResource( 5 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow botleft1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 64, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 192, 224, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow botleft1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow botleft1/StaticBody2D"]
+
+shape = SubResource( 6 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow botright1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 96, 32 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 224, 224, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow botright1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow botright1/StaticBody2D"]
+
+shape = SubResource( 7 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow hplatl1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 0, 64 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 192, 240, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow hplatl1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 11 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow hplatl1/StaticBody2D"]
+
+shape = SubResource( 11 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow hplatm1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 32, 64 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 208, 240, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow hplatm1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 11 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow hplatm1/StaticBody2D"]
+
+shape = SubResource( 11 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow hplatr1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 64, 64 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 224, 240, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow hplatr1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 11 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow hplatr1/StaticBody2D"]
+
+shape = SubResource( 11 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow aplat1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 96, 64 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 240, 240, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow aplat1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 11 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow aplat1/StaticBody2D"]
+
+shape = SubResource( 11 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow vplatl1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 0, 96 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 240, 192, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow vplatl1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 11 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow vplatl1/StaticBody2D"]
+
+shape = SubResource( 11 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow vplatm1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 32, 96 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 240, 206, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow vplatm1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 11 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow vplatm1/StaticBody2D"]
+
+shape = SubResource( 11 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow vplatr1" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 64, 96 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 240, 224, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow vplatr1"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 11 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow vplatr1/StaticBody2D"]
+
+shape = SubResource( 11 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Snow in" type="Sprite" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 96, 96 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 208, 208, 16, 16 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Snow in"]
+
+visibility/visible = false
+input/pickable = false
+shapes/0/shape = SubResource( 8 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snow in/StaticBody2D"]
+
+shape = SubResource( 8 )
+trigger = false
+_update_shape_index = -1
+
+

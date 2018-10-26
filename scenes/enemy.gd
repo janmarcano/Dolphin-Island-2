@@ -2,8 +2,8 @@ extends Node2D
 
 var hp = 1
 var attack = preload("res://scenes/attack.gd")
-var hit_effects = preload("res://scenes/hit_effects.scn")
-var smoke_effects = preload("res://scenes/smoke_effects.scn")
+var hit_effects = preload("res://scenes/hit_effects.tscn")
+var smoke_effects = preload("res://scenes/smoke_effects.tscn")
 var controller
 var sound
 
