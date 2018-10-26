@@ -3,7 +3,8 @@
 [ext_resource path="res://scenes/checkpoint.gd" type="Script" id=1]
 [ext_resource path="res://images/tileset.png" type="Texture" id=2]
 [ext_resource path="res://images/effects.png" type="Texture" id=3]
-[ext_resource path="res://sounds/checkpoint.smp" type="Sample" id=4]
+[ext_resource path="res://sounds/checkpoint.tres" type="Sample" id=4]
+
 
 [sub_resource type="RectangleShape2D" id=2]
 

@@ -1,15 +1,24 @@
 [gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://scenes/sound_manager.gd" type="Script" id=1]
-[ext_resource path="res://sounds/accept.smp" type="Sample" id=2]
-[ext_resource path="res://sounds/cancel.smp" type="Sample" id=3]
-[ext_resource path="res://sounds/ding.smp" type="Sample" id=4]
-[ext_resource path="res://sounds/dot.smp" type="Sample" id=5]
-[ext_resource path="res://sounds/fanfare.smp" type="Sample" id=6]
-[ext_resource path="res://sounds/hit.smp" type="Sample" id=7]
-[ext_resource path="res://sounds/hurt.smp" type="Sample" id=8]
-[ext_resource path="res://sounds/rumble.smp" type="Sample" id=9]
-[ext_resource path="res://sounds/smoke.smp" type="Sample" id=10]
+[ext_resource path="res://sounds/accept.tres" type="Sample" id=2]
+[ext_resource path="res://sounds/cancel.tres" type="Sample" id=3]
+[ext_resource path="res://sounds/ding.tres" type="Sample" id=4]
+[ext_resource path="res://sounds/dot.tres" type="Sample" id=5]
+[ext_resource path="res://sounds/fanfare.tres" type="Sample" id=6]
+[ext_resource path="res://sounds/hit.tres" type="Sample" id=7]
+[ext_resource path="res://sounds/hurt.tres" type="Sample" id=8]
+[ext_resource path="res://sounds/rumble.tres" type="Sample" id=9]
+[ext_resource path="res://sounds/smoke.tres" type="Sample" id=10]
+
+
+
+
+
+
+
+
+
 
 [sub_resource type="SampleLibrary" id=1]
 

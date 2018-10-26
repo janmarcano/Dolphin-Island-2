@@ -11,7 +11,7 @@ extends Node2D
 
 var player_class = preload(\"res://scenes/player.gd\")
 var player
-var umbra_class = preload(\"res://scenes/umbra.res\")
+var umbra_class = preload(\"res://scenes/umbra.tscn\")
 var umbra
 var boss_music = false
 var boss_theme = load(\"res://sounds/MightOfTheUnseen.ogg\")

@@ -6,7 +6,7 @@
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/checkpoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://images/mobsheet.png" type="Texture" id=6]
-[ext_resource path="res://sounds/mage_shoot.smp" type="Sample" id=7]
+[ext_resource path="res://sounds/mage_shoot.tres" type="Sample" id=7]
 [ext_resource path="res://scenes/anchor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/teleport.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/marker.tscn" type="PackedScene" id=10]
@@ -15,6 +15,7 @@
 [ext_resource path="res://images/hubbg3.png" type="Texture" id=13]
 [ext_resource path="res://images/hubbg2.png" type="Texture" id=14]
 [ext_resource path="res://images/hubbg1.png" type="Texture" id=15]
+
 
 
 

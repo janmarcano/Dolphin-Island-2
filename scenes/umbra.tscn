@@ -4,8 +4,10 @@
 [ext_resource path="res://images/umbrattacks.png" type="Texture" id=2]
 [ext_resource path="res://other/ingame.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://scenes/spike.tscn" type="PackedScene" id=4]
-[ext_resource path="res://sounds/bite.smp" type="Sample" id=5]
-[ext_resource path="res://sounds/laugh.smp" type="Sample" id=6]
+[ext_resource path="res://sounds/bite.tres" type="Sample" id=5]
+[ext_resource path="res://sounds/laugh.tres" type="Sample" id=6]
+
+
 
 [sub_resource type="RectangleShape2D" id=5]
 

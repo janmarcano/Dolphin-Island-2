@@ -1,7 +1,8 @@
 [gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://images/runner.png" type="Texture" id=1]
-[ext_resource path="res://sounds/step.smp" type="Sample" id=2]
+[ext_resource path="res://sounds/step.tres" type="Sample" id=2]
+
 
 [sub_resource type="GDScript" id=7]
 
