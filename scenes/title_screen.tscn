@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://images/title.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "
+extends TextureFrame
+
+var controller
+var pressed = false
+var can_press = false
+
+func _ready():
+	controller = get_node(\"/root/Controller\")
+	controller.ui.hide()
+	set_process(true)
+
+func _process(delta):
+	if (can_press and (not pressed) and Input.is_action_pressed(\"jump\")):
+		pressed = true
+		controller.begin_cutscene()
+		controller.snd_manager.play_sfx(\"cancel\")
+		controller.root.change_map(\"res://scenes/tutorial.tscn\",0)
+
+func _on_Timer_2_timeout():
+	can_press = true"
+
+[node name="Title Screen" type="TextureFrame"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 40.0
+margin/bottom = 40.0
+texture = ExtResource( 1 )
+stretch_mode = 0
+script/script = SubResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "Script"
+}
+
+[node name="Timer 2" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer 2" to="." method="_on_Timer_2_timeout"]
+
+

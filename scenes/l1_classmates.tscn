@@ -1,0 +1,253 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://scenes/overlay.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/snow.tres" type="TileSet" id=2]
+[ext_resource path="res://images/classmates.png" type="Texture" id=3]
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2, 140 )
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "
+extends \"cutscene.gd\"
+
+var player = preload(\"res://scenes/player.gd\")
+var timer
+var text2
+var state = 0
+
+func _ready():
+	check = \"1Classmate\"
+	text = [\"[Aisha]: Megan! It's you!\", \"[Megan]: Aisha! Thank God. \\nI've been so alone.\", 
+			\"[Aisha]: Don't worry, we'll get you out \\nof here. Have you seen the others?\", \"[Megan]: No, I haven't left this \\nplace since I arrived.\",
+			\"[Aisha]: Alright. Sora? \\nIf you would, please.\", \"[Sora]: Right on it!\", \"[Aisha]: See you outside.\"]
+	text2 = [\"THANK YOU FOR PLAYING!\", \"We're looking forward to expanding this game post competition.\", 
+			\"If you'd like to see the current status of the game, be sure to follow us on twitter.\", 
+			\"@jtangc\\n@aldiansolkai\", \"Until next time!\\nPress Esc to exit.\", \"...\", \"...\", \"Come on now, \\nthere's really nothing more.\",
+			\"...\", \"...\", \"Alright then.\"]
+	timer = get_node(\"Timer\")
+
+func _on_Area2D_body_enter( body ):
+	if (body extends player):
+		var test = get_node(\"/root/Progress\").checks
+		if (check == null or (check != null and not test[check])):
+			controller.begin_cutscene()
+			controller.cam_target = get_node(\"CamPos\")
+			timer.start()
+
+func _fixed_process(delta):
+	if (not controller.cutscene):
+		if (state == 0):
+			controller.begin_cutscene()
+			get_node(\"AnimationPlayer\").play(\"Teleport\")
+			state = 1
+			timer.start()
+		if (state == 2):
+			controller.root.change_map(\"res://scenes/game_over.tscn\", 0)
+			controller.ui.hide()
+			set_fixed_process(false)
+
+func _on_Timer_timeout():
+#	snd.change_song()
+	if (state == 0):
+		get_node(\"AnimationPlayer\").play(\"Idle\")
+		controller.show_text(text)
+		set_fixed_process(true)
+	elif (state == 1):
+		var player = controller.get_player()
+		controller.cam_target = player
+		controller.change_face(\"Excited\")
+		player.top_sprite.play(\"Victory\")
+		player.bot_sprite.play(\"Victory\")
+		controller.begin_cutscene()
+		controller.show_text(text2)
+		state = 2
+		get_node(\"/root/Progress\").checks[check] = true"
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "Idle"
+length = 0.6
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29 ]
+}
+
+[sub_resource type="Animation" id=4]
+
+resource/name = "Kneel"
+length = 0.1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 35 ]
+}
+
+[sub_resource type="Animation" id=5]
+
+resource/name = "Teleport"
+length = 0.5
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44, 45, 46, 47, 48 ]
+}
+
+[node name="Classmate" type="Node2D"]
+
+__meta__ = {
+"__editor_plugin_screen__": "Script",
+"_edit_lock_": true
+}
+
+[node name="Overlay" type="TileMap" parent="."]
+
+transform/pos = Vector2( 0, 8 )
+z/z = 1
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 720897, 10, 720899, 10, 720900, 9, 720902, 10, 720903, 10, 720907, 9, 720910, 10, 720911, 9, 720913, 9, 720914, 9, 720915, 10, 720917, 10 )
+
+[node name="TileMap" type="TileMap" parent="."]
+
+editor/display_folded = true
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 0, 8, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1, 9, 1, 10, 1, 11, 1, 12, 1, 13, 1, 14, 1, 15, 1, 16, 1, 17, 1, 18, 1, 19, 9, 65536, 3, 65555, 2, 131072, 3, 131091, 2, 196608, 3, 196627, 2, 262144, 3, 262163, 2, 327680, 3, 327699, 2, 393216, 3, 393235, 2, 458752, 3, 458771, 2, 524288, 3, 524307, 2, 589824, 3, 589843, 6, 589844, 1, 589845, 1, 589846, 1, 655360, 3, 720896, 3, 786432, 0, 786433, 0, 786434, 0, 786435, 0, 786436, 0, 786437, 0, 786438, 0, 786439, 0, 786440, 0, 786441, 0, 786442, 0, 786443, 0, 786444, 0, 786445, 0, 786446, 0, 786447, 0, 786448, 0, 786449, 0, 786450, 0, 786451, 0, 786452, 0, 786453, 0, 786454, 0 )
+
+[node name="Polygon2D" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( 368, 208, 368, 288, -80, 288, -128, 208, 0, 208, 320, 208 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Polygon2D1" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( -128, 208, 0, 208, 0, 0, 320, 0, 320, 144, 368, 144, 368, -96, -80, -96 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Classmate" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 207, 85 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="CollisionShape2D" parent="Classmate"]
+
+transform/pos = Vector2( 207, 85 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[node name="CamPos" type="Position2D" parent="Classmate"]
+
+transform/pos = Vector2( 160, 160 )
+
+[node name="Timer" type="Timer" parent="Classmate"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Classmate"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/Idle = SubResource( 3 )
+anims/Kneel = SubResource( 4 )
+anims/Teleport = SubResource( 5 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "Kneel"
+
+[node name="Sprite" type="Sprite" parent="Classmate"]
+
+transform/pos = Vector2( 128, 176 )
+texture = ExtResource( 3 )
+vframes = 8
+hframes = 8
+frame = 35
+
+[connection signal="timeout" from="Classmate/Timer" to="Classmate" method="_on_Timer_timeout"]
+
+

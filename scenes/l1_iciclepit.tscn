@@ -1,0 +1,140 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scenes/overlay.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/snow.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/icicle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/pit.tscn" type="PackedScene" id=4]
+
+
+
+
+
+[node name="IciclePit" type="Node2D"]
+
+__meta__ = {
+"__editor_plugin_screen__": "2D",
+"_edit_lock_": true
+}
+
+[node name="Overlay" type="TileMap" parent="."]
+
+transform/pos = Vector2( 0, 8 )
+z/z = 1
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 196613, 10, 196615, 10, 196623, 9, 196624, 10, 196634, 10, 196644, 10, 196645, 9, 327724, 10, 393235, 10, 393238, 9, 393240, 10, 524281, 9, 524283, 10, 524284, 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -196612, 8, -196611, 1, -196610, 1, -196609, 1, -262144, 9, -131078, 8, -131077, 1, -131076, 7, -196608, 6, -196607, 9, -196605, 8, -196604, 1, -196603, 1, -196602, 1, -196601, 1, -196600, 1, -196599, 1, -196598, 1, -196597, 1, -196596, 1, -196595, 1, -196594, 1, -196593, 1, -196592, 9, -196582, 8, -196581, 1, -196580, 1, -196579, 1, -196578, 1, -196577, 1, -196576, 1, -196575, 1, -196574, 1, -196573, 1, -196572, 1, -196571, 1, -196570, 1, -196569, 1, -196568, 1, -196567, 1, -196566, 9, -65543, 8, -65542, 7, -131071, 6, -131070, 1, -131069, 7, -131056, 6, -131055, 1, -131054, 9, -131050, 8, -131049, 1, -131048, 1, -131047, 1, -131046, 7, -131030, 6, -131029, 1, -131028, 1, -131027, 1, -7, 3, -65518, 6, -65517, 1, -65516, 1, -65515, 1, -65514, 7, 65529, 3, 131065, 3, 196601, 3, 262135, 1, 262136, 1, 262137, 7, 262149, 12, 262150, 13, 262151, 14, 262158, 12, 262159, 13, 262160, 14, 262170, 12, 262171, 14, 262179, 12, 262180, 13, 262181, 13, 262182, 14, 393260, 4, 393261, 0, 458771, 19, 458772, 19, 458773, 19, 458774, 19, 458775, 19, 458776, 19, 458796, 2, 589815, 0, 589816, 0, 589817, 0, 589818, 0, 589819, 0, 589820, 5, 524307, 20, 524308, 20, 524309, 20, 524310, 20, 524311, 20, 524312, 20, 524332, 2, 655356, 3, 589843, 20, 589844, 20, 589845, 20, 589846, 20, 589847, 20, 589848, 20, 589868, 2, 720892, 3, 655379, 20, 655380, 20, 655381, 20, 655382, 20, 655383, 20, 655384, 20, 655404, 2, 786428, 3, 720915, 20, 720916, 20, 720917, 20, 720918, 20, 720919, 20, 720920, 20, 720940, 2, 851964, 3, 786451, 20, 786452, 20, 786453, 20, 786454, 20, 786455, 20, 786456, 20, 786476, 2, 917500, 3, 851987, 20, 851988, 20, 851989, 20, 851990, 20, 851991, 20, 851992, 20, 852012, 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( 736, -32, 688, -32, 688, -48, 416, -48, 416, -32, 352, -32, 352, -16, 304, -16, 304, -32, 272, -32, 272, -48, 48, -48, 48, -32, 32, -32, 32, -48, 16, -48, 16, -64, -64, -64, -64, -48, -96, -48, -96, -32, -112, -32, -112, 48, -256, 48, -192, -176, 736, -176 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Polygon2D1" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( 736, 112, 720, 112, 720, 224, -64, 224, -64, 144, -144, 144, -144, 336, 736, 336 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Icicles" type="Node2D" parent="."]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Icicle" parent="Icicles" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 112, -32 )
+
+[node name="Icicle1" parent="Icicles" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 224, -32 )
+
+[node name="Icicle2" parent="Icicles" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 432, -32 )
+
+[node name="Icicle3" parent="Icicles" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 608, -32 )
+
+[node name="Pits" type="Node2D" parent="."]
+
+[node name="Pit" parent="Pits" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 640, 144 )
+
+[node name="Pit1" parent="Pits" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 512, 144 )
+
+[node name="Pit2" parent="Pits" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 384, 144 )
+
+[node name="Pit3" parent="Pits" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 256, 144 )
+
+[node name="Pit4" parent="Pits" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 128, 144 )
+
+[node name="Pit5" parent="Pits" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 16, 144 )
+
+

@@ -6,7 +6,7 @@ export var strong = true
 export var hits = 1
 var normal_hit = preload("res://scenes/attack.gd")
 var strong_hit = preload("res://scenes/strong_attack.gd")
-var smoke_effects = preload("res://scenes/smoke_effects.scn")
+var smoke_effects = preload("res://scenes/smoke_effects.tscn")
 var controller
 
 func _ready():

@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=1]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 14, 14 )
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "
+extends \"res://scenes/hurtful.gd\"
+
+func _ready():
+	get_node(\"Timer\").start()
+
+func _on_Timer_timeout():
+	queue_free()
+"
+
+[node name="BiteHit" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 8 )
+shapes/0/trigger = true
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = SubResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0, 8 )
+shape = SubResource( 2 )
+trigger = true
+_update_shape_index = -1
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

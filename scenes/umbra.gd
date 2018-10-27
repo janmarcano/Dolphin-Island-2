@@ -8,9 +8,9 @@ var state = "none"
 var timer
 var head
 # Combat preloads
-var bite_hit = preload("res://scenes/bite_hit.scn")
-var swipeL = preload("res://scenes/swipeL.res")
-var swipeR = preload("res://scenes/swipeR.res")
+var bite_hit = preload("res://scenes/bite_hit.tscn")
+var swipeL = preload("res://scenes/swipeL.tscn")
+var swipeR = preload("res://scenes/swipeR.tscn")
 # Combat variables
 const maxhp = 10
 const SPIKE_AREA = 224

@@ -1,0 +1,138 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://scenes/snow.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/mage_imp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/runner_imp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/marker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/icicle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/pit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/overlay.tres" type="TileSet" id=7]
+
+
+
+
+
+
+
+
+[node name="ImpMix" type="Node2D"]
+
+__meta__ = {
+"__editor_plugin_screen__": "2D",
+"_edit_lock_": true
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -262108, 8, -262107, 1, -262106, 1, -262105, 1, -262104, 1, -262103, 1, -262102, 1, -262101, 1, -262100, 1, -262099, 9, -196587, 8, -196586, 1, -196585, 1, -196584, 1, -196583, 1, -196582, 1, -196581, 1, -196580, 9, -196577, 8, -196576, 1, -196575, 1, -196574, 1, -196573, 1, -196572, 7, -196563, 6, -196562, 1, -196561, 1, -196560, 9, -131052, 8, -131051, 7, -131044, 6, -131043, 1, -131042, 1, -131041, 7, -131024, 6, -131023, 1, -131022, 1, -131021, 9, -65518, 8, -65517, 1, -65516, 7, -65485, 6, -65484, 9, 9, 8, 10, 1, 11, 1, 12, 1, 13, 1, 14, 9, 16, 8, 17, 1, 18, 7, 52, 6, 53, 1, 65543, 8, 65544, 1, 65545, 7, 65550, 6, 65551, 1, 65552, 7, 131074, 1, 131075, 1, 131076, 1, 131077, 1, 131078, 1, 131079, 7, 196631, 12, 196632, 13, 196633, 14, 327708, 4, 327709, 0, 327710, 0, 327711, 0, 327712, 0, 327713, 5, 327732, 4, 327733, 0, 393244, 2, 393249, 3, 393260, 4, 393261, 0, 393262, 0, 393263, 0, 393264, 0, 393265, 0, 393266, 0, 393267, 0, 393268, 11, 458780, 2, 458785, 3, 458789, 4, 458790, 0, 458791, 5, 458796, 2, 524290, 0, 524291, 0, 524292, 0, 524293, 0, 524294, 0, 524295, 0, 524296, 0, 524297, 0, 524298, 0, 524299, 0, 524300, 0, 524301, 0, 524302, 0, 524303, 0, 524304, 0, 524305, 0, 524306, 0, 524307, 0, 524308, 0, 524309, 0, 524310, 0, 524311, 0, 524312, 0, 524313, 0, 524314, 0, 524315, 0, 524316, 11, 524321, 3, 524325, 2, 524327, 3, 524332, 2, 589857, 3, 589861, 2, 589863, 3, 589868, 2, 655393, 3, 655397, 2, 655399, 3, 655404, 2, 720929, 3, 720933, 2, 720935, 3, 720940, 2, 786465, 3, 786469, 2, 786471, 3, 786476, 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( 32, 32, 112, 32, 112, 16, 144, 16, 144, 0, 240, 0, 240, 16, 256, 16, 256, 0, 288, 0, 288, -16, 320, -16, 320, -32, 336, -32, 336, -48, 464, -48, 464, -32, 496, -32, 496, -48, 576, -48, 576, -64, 736, -64, 736, -48, 784, -48, 784, -32, 832, -32, 832, -16, 848, -16, 848, 0, 864, 0, 864, -144, 32, -144 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Polygon2D1" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( 32, 144, 464, 144, 464, 96, 528, 96, 528, 208, 608, 208, 608, 128, 624, 128, 624, 208, 720, 208, 720, 112, 848, 112, 848, 96, 864, 96, 864, 224, 32, 224 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Enemies" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Mage Imp" parent="Enemies" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 375, 48 )
+
+[node name="Mage Imp1" parent="Enemies" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 752, 96 )
+
+[node name="Runner Imp" parent="Enemies" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 176, 128 )
+
+[node name="Runner Imp1" parent="Enemies" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 288, 128 )
+
+[node name="Marker" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 128, 128 )
+
+[node name="Marker1" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 368, 128 )
+
+[node name="Hazards" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Icicle" parent="Hazards" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 240, 32 )
+
+[node name="Pit" parent="Hazards" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 560, 128 )
+
+[node name="Pit1" parent="Hazards" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 672, 128 )
+
+[node name="Overlay" type="TileMap" parent="."]
+
+transform/pos = Vector2( 0, 8 )
+z/z = 1
+mode = 0
+tile_set = ExtResource( 7 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 131095, 10, 131096, 9, 262172, 10, 262175, 10, 262176, 9, 262196, 10, 262197, 9, 327726, 9, 327727, 10, 327730, 9, 327731, 10, 393253, 10, 393255, 9, 458755, 9, 458756, 9, 458760, 10, 458762, 10, 458763, 10, 458766, 9, 458769, 10, 458770, 10, 458775, 9, 458776, 10 )
+
+

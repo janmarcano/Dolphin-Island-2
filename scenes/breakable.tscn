@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://images/tileset.png" type="Texture" id=1]
+[ext_resource path="res://scenes/breakable.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[node name="Breakable" type="Sprite"]
+
+texture = ExtResource( 1 )
+offset = Vector2( 8, 8 )
+vframes = 16
+hframes = 16
+frame = 112
+script/script = ExtResource( 2 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+solid = true
+strong = true
+hits = 1
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 8, 8 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+
+transform/pos = Vector2( 8, 8 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 8, 8 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( 8, 8 )
+shape = SubResource( 2 )
+trigger = true
+_update_shape_index = -1
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+

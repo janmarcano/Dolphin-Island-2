@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 32 )
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "
+extends Area2D
+
+var controller
+var player_class = preload(\"res://scenes/player.gd\")
+export var level = \"tutorial\"
+export var checkpoint = 0
+
+func _ready():
+	controller = get_node(\"/root/Controller\")
+	
+func _on_Teleport_body_enter( body ):
+	if (body extends player_class):
+		controller.root.change_map(\"res://scenes/\"+level+\".tscn\",checkpoint)
+"
+
+[node name="Teleport" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 2 )
+__meta__ = {
+"__editor_plugin_screen__": "Script"
+}
+level = "tutorial"
+checkpoint = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.75
+one_shot = false
+autostart = false
+
+[connection signal="body_enter" from="." to="." method="_on_Teleport_body_enter"]
+
+

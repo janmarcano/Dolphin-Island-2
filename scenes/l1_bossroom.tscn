@@ -1,0 +1,250 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://scenes/overlay.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/snow.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/marker.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/sprinter_imp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/breakable.tscn" type="PackedScene" id=5]
+
+
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 140, 2 )
+
+[sub_resource type="GDScript" id=2]
+
+script/source = "
+extends \"cutscene.gd\"
+
+var player = preload(\"res://scenes/player.gd\")
+var timer
+var state = 0
+var hp = 0
+var hpmax = 20
+var boss
+var snd
+
+func _ready():
+	check = \"1BossDead\"
+	text = [\"You got the Air Slash!\", \"Press DOWN + ATTACK to execute a stronger attack.\"]
+	timer = get_node(\"Timer\")
+	boss = get_node(\"Boss\")
+	snd = get_node(\"/root/SoundManager\")
+
+func _on_Area2D_body_enter( body ):
+	if (body extends player):
+		var test = get_node(\"/root/Progress\").checks
+		if (check == null or (check != null and not test[check])):
+			controller.begin_cutscene()
+			controller.cam_target = get_node(\"CamPos\")
+			hpmax = boss.hp
+			hp = 0
+			controller.show_bosshp(hpmax)
+			timer.start()
+
+func _fixed_process(delta):
+	if (state == 0):
+		if (hp < hpmax):
+			snd.play_sfx(\"dot\")
+			hp += 0.25
+			controller.bosshp.update(hp)
+		else:
+			timer.start()
+			state = 1
+	if (state == 1):
+		if (boss.hp > 0):
+			controller.bosshp.update(boss.hp)
+		else:
+			controller.hide_bosshp()
+			controller.begin_cutscene()
+			state = 2
+			timer.start()
+			set_fixed_process(false)
+
+func _on_Timer_timeout():
+#	snd.change_song()
+	if (state == 0):
+		set_fixed_process(true)
+	elif (state == 1):
+		boss.active = true
+		controller.end_cutscene()
+	elif (state == 2):
+		var player = controller.get_player()
+		controller.cam_target = player
+#		controller.snd_manager.play_sfx(\"fanfare\")
+		controller.change_face(\"Excited\")
+		player.top_sprite.play(\"Victory\")
+		player.bot_sprite.play(\"Victory\")
+		player.effects.play(\"UpStrongSlash\")
+		controller.begin_cutscene()
+		controller.show_text(text)
+		var progress = get_node(\"/root/Progress\").checks
+		progress[check] = true
+		progress[\"StrongSlash\"] = true
+		player.strong_slash = true"
+
+[node name="Boss Room" type="Node2D"]
+
+__meta__ = {
+"__editor_plugin_screen__": "2D",
+"_edit_lock_": true
+}
+
+[node name="Overlay" type="TileMap" parent="."]
+
+transform/pos = Vector2( 0, 8 )
+z/z = 1
+mode = 0
+tile_set = ExtResource( 1 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( 196628, 10, 196629, 9, 720897, 10, 720899, 9, 720900, 9, 720902, 10, 720905, 9, 720906, 10, 720907, 9, 720908, 10, 720909, 9, 720912, 10, 720913, 9 )
+
+[node name="TileMap" type="TileMap" parent="."]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell/size = Vector2( 16, 16 )
+cell/quadrant_size = 16
+cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+cell/half_offset = 2
+cell/tile_origin = 0
+cell/y_sort = false
+collision/use_kinematic = false
+collision/friction = 1.0
+collision/bounce = 0.0
+collision/layers = 1
+collision/mask = 1
+occluder/light_mask = 1
+tile_data = IntArray( -65522, 8, -65521, 1, -65520, 1, -65519, 1, -65518, 1, -65517, 1, -65516, 1, -65515, 1, -65514, 1, 0, 8, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1, 9, 1, 10, 1, 11, 1, 12, 1, 13, 1, 14, 7, 65536, 3, 131072, 3, 196608, 3, 262144, 3, 262163, 4, 262164, 0, 262165, 0, 262166, 0, 327680, 3, 327699, 2, 393216, 3, 393235, 2, 458752, 3, 458771, 2, 524288, 3, 524307, 2, 655355, 1, 655356, 1, 655357, 1, 655358, 1, 655359, 1, 589824, 7, 589843, 2, 655379, 2, 720915, 2, 851963, 0, 851964, 0, 851965, 0, 851966, 0, 851967, 0, 786432, 0, 786433, 0, 786434, 0, 786435, 0, 786436, 0, 786437, 0, 786438, 0, 786439, 0, 786440, 0, 786441, 0, 786442, 0, 786443, 0, 786444, 0, 786445, 0, 786446, 0, 786447, 0, 786448, 0, 786449, 0, 786450, 0, 786451, 11 )
+
+[node name="Polygon2D" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( 448, 80, 448, 288, -80, 288, -80, 208, 320, 208, 320, 80 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Polygon2D1" type="Polygon2D" parent="TileMap"]
+
+polygon = Vector2Array( -80, 144, 0, 144, 0, 0, 224, 0, 224, -16, 368, -16, 368, -96, -80, -96 )
+uv = Vector2Array(  )
+color = Color( 0.133333, 0.12549, 0.203922, 1 )
+vertex_colors = ColorArray(  )
+offset = Vector2( 0, 0 )
+texture/texture = null
+texture/offset = Vector2( 0, 0 )
+texture/scale = Vector2( 1, 1 )
+texture/rotation = 0.0
+invert/enable = false
+invert/border = 100.0
+
+[node name="Boss Fight" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 159, 85 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Area2D" type="CollisionShape2D" parent="Boss Fight"]
+
+transform/pos = Vector2( 159, 85 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[node name="Marker" parent="Boss Fight" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 16, 192 )
+
+[node name="Marker1" parent="Boss Fight" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 304, 192 )
+
+[node name="Boss" parent="Boss Fight" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 32, 192 )
+
+[node name="CamPos" type="Position2D" parent="Boss Fight"]
+
+transform/pos = Vector2( 160, 160 )
+
+[node name="Timer" type="Timer" parent="Boss Fight"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="Breaks" type="Node2D" parent="."]
+
+[node name="Breakable" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 0, 160 )
+frame = 99
+
+[node name="Breakable1" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 0, 176 )
+frame = 115
+
+[node name="Breakable2" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( -16, 160 )
+frame = 99
+
+[node name="Breakable2 2" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( -16, 176 )
+frame = 115
+
+[node name="Breakable3" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( -48, 160 )
+frame = 99
+
+[node name="Breakable3 2" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( -48, 176 )
+frame = 115
+
+[node name="Breakable3 3" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( -64, 160 )
+frame = 99
+
+[node name="Breakable23" parent="Breaks" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( -64, 176 )
+frame = 115
+
+[connection signal="timeout" from="Boss Fight/Timer" to="Boss Fight" method="_on_Timer_timeout"]
+
+

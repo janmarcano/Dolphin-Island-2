@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://scenes/sound_manager.gd" type="Script" id=1]
+[ext_resource path="res://sounds/accept.tres" type="Sample" id=2]
+[ext_resource path="res://sounds/cancel.tres" type="Sample" id=3]
+[ext_resource path="res://sounds/ding.tres" type="Sample" id=4]
+[ext_resource path="res://sounds/dot.tres" type="Sample" id=5]
+[ext_resource path="res://sounds/fanfare.tres" type="Sample" id=6]
+[ext_resource path="res://sounds/hit.tres" type="Sample" id=7]
+[ext_resource path="res://sounds/hurt.tres" type="Sample" id=8]
+[ext_resource path="res://sounds/rumble.tres" type="Sample" id=9]
+[ext_resource path="res://sounds/smoke.tres" type="Sample" id=10]
+
+
+
+
+
+
+
+
+
+
+[sub_resource type="SampleLibrary" id=1]
+
+samples/accept = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/cancel = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 3 )
+}
+samples/ding = {
+"db": -12.0,
+"pitch": 0.75,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+samples/dot = {
+"db": -12.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 5 )
+}
+samples/fanfare = {
+"db": -6.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 6 )
+}
+samples/hit = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 7 )
+}
+samples/hurt = {
+"db": 12.0,
+"pitch": 1.25,
+"priority": 0,
+"sample": ExtResource( 8 )
+}
+samples/rumble = {
+"db": 0.0,
+"pitch": 0.25,
+"priority": 0,
+"sample": ExtResource( 9 )
+}
+samples/smoke = {
+"db": 0.0,
+"pitch": 1.25,
+"priority": 0,
+"sample": ExtResource( 10 )
+}
+
+[node name="sound_manager" type="StreamPlayer"]
+
+stream/stream = null
+stream/play = false
+stream/loop = false
+stream/volume_db = -6.0
+stream/autoplay = false
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+script/script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
+
+[node name="sfx" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 1 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 0.0
+default/filter/resonance = 0.0
+default/filter/gain = 0.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+
