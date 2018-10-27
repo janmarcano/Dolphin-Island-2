@@ -260,7 +260,7 @@ func _movement(delta):
 	# Make sure attack fixes
 	if (attacking and !is_attacking()):
 		attacking = false
-	print("IA:" + str(is_attacking())+" A: "+str(attacking))
+#	print("IA:" + str(is_attacking())+" A: "+str(attacking))
 
 	# End Movement and Fixed Process
 	

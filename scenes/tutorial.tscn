@@ -307,7 +307,6 @@ editor/display_folded = true
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -330,7 +329,6 @@ __meta__ = {
 
 [node name="Intro" type="Area2D" parent="Events"]
 
-editor/display_folded = true
 transform/pos = Vector2( 66, 288 )
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
@@ -485,6 +483,7 @@ frame = 45
 
 [node name="ParallaxLayer" type="ParallaxBackground" parent="."]
 
+editor/display_folded = true
 layer = -1
 offset = Vector2( 0, 0 )
 rotation = 0.0

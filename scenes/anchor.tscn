@@ -24,7 +24,7 @@ func _on_CameraAnchor_body_enter( body ):
 func _on_CameraAnchor_body_exit( body ):
 	var c = get_node(\"/root/Controller\")
 	if (body extends player_class and c.root.load_state == 0):
-		print(\"aaaa\")
+#		print(\"aaaa\")
 		c.cam_target = body"
 
 [node name="CameraAnchor" type="Area2D"]

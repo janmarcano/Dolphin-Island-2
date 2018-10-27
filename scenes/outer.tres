@@ -2,22 +2,7 @@
 
 [ext_resource path="res://images/tileset.png" type="Texture" id=1]
 
-[sub_resource type="RectangleShape2D" id=12]
-
-custom_solver_bias = 0.0
-extents = Vector2( 8, 8 )
-
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 8, 8 )
-
-[sub_resource type="RectangleShape2D" id=10]
-
-custom_solver_bias = 0.0
-extents = Vector2( 8, 8 )
-
-[sub_resource type="RectangleShape2D" id=11]
 
 custom_solver_bias = 0.0
 extents = Vector2( 8, 8 )
@@ -62,6 +47,21 @@ extents = Vector2( 8, 8 )
 custom_solver_bias = 0.0
 extents = Vector2( 8, 8 )
 
+[sub_resource type="RectangleShape2D" id=10]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=11]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
+[sub_resource type="RectangleShape2D" id=12]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8, 8 )
+
 [resource]
 
 0/name = "Dirt top"
@@ -72,7 +72,7 @@ extents = Vector2( 8, 8 )
 0/occluder_offset = Vector2( 8, 8 )
 0/navigation_offset = Vector2( 8, 8 )
 0/shape_offset = Vector2( 8, 8 )
-0/shapes = [ SubResource( 12 ) ]
+0/shapes = [ SubResource( 1 ) ]
 0/one_way_collision_direction = Vector2( 0, 0 )
 0/one_way_collision_max_depth = 0.0
 1/name = "Dirt bot"
@@ -83,7 +83,7 @@ extents = Vector2( 8, 8 )
 1/occluder_offset = Vector2( 8, 8 )
 1/navigation_offset = Vector2( 8, 8 )
 1/shape_offset = Vector2( 8, 8 )
-1/shapes = [ SubResource( 1 ) ]
+1/shapes = [ SubResource( 2 ) ]
 1/one_way_collision_direction = Vector2( 0, 0 )
 1/one_way_collision_max_depth = 0.0
 2/name = "Dirt left"
@@ -94,7 +94,7 @@ extents = Vector2( 8, 8 )
 2/occluder_offset = Vector2( 8, 8 )
 2/navigation_offset = Vector2( 8, 8 )
 2/shape_offset = Vector2( 8, 8 )
-2/shapes = [ SubResource( 2 ) ]
+2/shapes = [ SubResource( 5 ) ]
 2/one_way_collision_direction = Vector2( 0, 0 )
 2/one_way_collision_max_depth = 0.0
 3/name = "Dirt right"
@@ -105,7 +105,7 @@ extents = Vector2( 8, 8 )
 3/occluder_offset = Vector2( 8, 8 )
 3/navigation_offset = Vector2( 8, 8 )
 3/shape_offset = Vector2( 8, 8 )
-3/shapes = [ SubResource( 3 ) ]
+3/shapes = [ SubResource( 6 ) ]
 3/one_way_collision_direction = Vector2( 0, 0 )
 3/one_way_collision_max_depth = 0.0
 4/name = "Dirt topleft"
@@ -116,7 +116,7 @@ extents = Vector2( 8, 8 )
 4/occluder_offset = Vector2( 8, 8 )
 4/navigation_offset = Vector2( 8, 8 )
 4/shape_offset = Vector2( 8, 8 )
-4/shapes = [ SubResource( 4 ) ]
+4/shapes = [ SubResource( 7 ) ]
 4/one_way_collision_direction = Vector2( 0, 0 )
 4/one_way_collision_max_depth = 0.0
 5/name = "Dirt topright"
@@ -127,7 +127,7 @@ extents = Vector2( 8, 8 )
 5/occluder_offset = Vector2( 8, 8 )
 5/navigation_offset = Vector2( 8, 8 )
 5/shape_offset = Vector2( 8, 8 )
-5/shapes = [ SubResource( 5 ) ]
+5/shapes = [ SubResource( 8 ) ]
 5/one_way_collision_direction = Vector2( 0, 0 )
 5/one_way_collision_max_depth = 0.0
 6/name = "Dirt botleft"
@@ -138,7 +138,7 @@ extents = Vector2( 8, 8 )
 6/occluder_offset = Vector2( 8, 8 )
 6/navigation_offset = Vector2( 8, 8 )
 6/shape_offset = Vector2( 8, 8 )
-6/shapes = [ SubResource( 6 ) ]
+6/shapes = [ SubResource( 9 ) ]
 6/one_way_collision_direction = Vector2( 0, 0 )
 6/one_way_collision_max_depth = 0.0
 7/name = "Dirt botright"
@@ -149,7 +149,7 @@ extents = Vector2( 8, 8 )
 7/occluder_offset = Vector2( 8, 8 )
 7/navigation_offset = Vector2( 8, 8 )
 7/shape_offset = Vector2( 8, 8 )
-7/shapes = [ SubResource( 7 ) ]
+7/shapes = [ SubResource( 10 ) ]
 7/one_way_collision_direction = Vector2( 0, 0 )
 7/one_way_collision_max_depth = 0.0
 8/name = "Dirt intopl"
@@ -160,7 +160,7 @@ extents = Vector2( 8, 8 )
 8/occluder_offset = Vector2( 8, 8 )
 8/navigation_offset = Vector2( 8, 8 )
 8/shape_offset = Vector2( 8, 8 )
-8/shapes = [ SubResource( 8 ) ]
+8/shapes = [ SubResource( 11 ) ]
 8/one_way_collision_direction = Vector2( 0, 0 )
 8/one_way_collision_max_depth = 0.0
 9/name = "Dirt intopr"
@@ -171,7 +171,7 @@ extents = Vector2( 8, 8 )
 9/occluder_offset = Vector2( 8, 8 )
 9/navigation_offset = Vector2( 8, 8 )
 9/shape_offset = Vector2( 8, 8 )
-9/shapes = [ SubResource( 9 ) ]
+9/shapes = [ SubResource( 12 ) ]
 9/one_way_collision_direction = Vector2( 0, 0 )
 9/one_way_collision_max_depth = 0.0
 10/name = "Dirt inbotl"
@@ -182,7 +182,7 @@ extents = Vector2( 8, 8 )
 10/occluder_offset = Vector2( 8, 8 )
 10/navigation_offset = Vector2( 8, 8 )
 10/shape_offset = Vector2( 8, 8 )
-10/shapes = [ SubResource( 10 ) ]
+10/shapes = [ SubResource( 3 ) ]
 10/one_way_collision_direction = Vector2( 0, 0 )
 10/one_way_collision_max_depth = 0.0
 11/name = "Dirt inbotr"
@@ -193,7 +193,7 @@ extents = Vector2( 8, 8 )
 11/occluder_offset = Vector2( 8, 8 )
 11/navigation_offset = Vector2( 8, 8 )
 11/shape_offset = Vector2( 8, 8 )
-11/shapes = [ SubResource( 11 ) ]
+11/shapes = [ SubResource( 4 ) ]
 11/one_way_collision_direction = Vector2( 0, 0 )
 11/one_way_collision_max_depth = 0.0
 12/name = "Dirt hplatl"
@@ -204,7 +204,7 @@ extents = Vector2( 8, 8 )
 12/occluder_offset = Vector2( 8, 8 )
 12/navigation_offset = Vector2( 8, 8 )
 12/shape_offset = Vector2( 8, 8 )
-12/shapes = [ SubResource( 11 ) ]
+12/shapes = [ SubResource( 4 ) ]
 12/one_way_collision_direction = Vector2( 0, 0 )
 12/one_way_collision_max_depth = 0.0
 13/name = "Dirt hplatm"
@@ -215,7 +215,7 @@ extents = Vector2( 8, 8 )
 13/occluder_offset = Vector2( 8, 8 )
 13/navigation_offset = Vector2( 8, 8 )
 13/shape_offset = Vector2( 8, 8 )
-13/shapes = [ SubResource( 11 ) ]
+13/shapes = [ SubResource( 4 ) ]
 13/one_way_collision_direction = Vector2( 0, 0 )
 13/one_way_collision_max_depth = 0.0
 14/name = "Dirt hplatr"
@@ -226,7 +226,7 @@ extents = Vector2( 8, 8 )
 14/occluder_offset = Vector2( 8, 8 )
 14/navigation_offset = Vector2( 8, 8 )
 14/shape_offset = Vector2( 8, 8 )
-14/shapes = [ SubResource( 11 ) ]
+14/shapes = [ SubResource( 4 ) ]
 14/one_way_collision_direction = Vector2( 0, 0 )
 14/one_way_collision_max_depth = 0.0
 15/name = "Dirt aplat"
@@ -237,7 +237,7 @@ extents = Vector2( 8, 8 )
 15/occluder_offset = Vector2( 8, 8 )
 15/navigation_offset = Vector2( 8, 8 )
 15/shape_offset = Vector2( 8, 8 )
-15/shapes = [ SubResource( 11 ) ]
+15/shapes = [ SubResource( 4 ) ]
 15/one_way_collision_direction = Vector2( 0, 0 )
 15/one_way_collision_max_depth = 0.0
 16/name = "Dirt vplatl"
@@ -248,7 +248,7 @@ extents = Vector2( 8, 8 )
 16/occluder_offset = Vector2( 8, 8 )
 16/navigation_offset = Vector2( 8, 8 )
 16/shape_offset = Vector2( 8, 8 )
-16/shapes = [ SubResource( 11 ) ]
+16/shapes = [ SubResource( 4 ) ]
 16/one_way_collision_direction = Vector2( 0, 0 )
 16/one_way_collision_max_depth = 0.0
 17/name = "Dirt vplatm"
@@ -259,7 +259,7 @@ extents = Vector2( 8, 8 )
 17/occluder_offset = Vector2( 8, 8 )
 17/navigation_offset = Vector2( 8, 8 )
 17/shape_offset = Vector2( 8, 8 )
-17/shapes = [ SubResource( 11 ) ]
+17/shapes = [ SubResource( 4 ) ]
 17/one_way_collision_direction = Vector2( 0, 0 )
 17/one_way_collision_max_depth = 0.0
 18/name = "Dirt vplatr"
@@ -270,7 +270,7 @@ extents = Vector2( 8, 8 )
 18/occluder_offset = Vector2( 8, 8 )
 18/navigation_offset = Vector2( 8, 8 )
 18/shape_offset = Vector2( 8, 8 )
-18/shapes = [ SubResource( 11 ) ]
+18/shapes = [ SubResource( 4 ) ]
 18/one_way_collision_direction = Vector2( 0, 0 )
 18/one_way_collision_max_depth = 0.0
 

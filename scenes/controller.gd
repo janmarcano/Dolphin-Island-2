@@ -48,7 +48,7 @@ func _ready():
 	lifeforce_timer = root.get_node("LifeforceTimer")
 	progress = get_node("/root/Progress")
 	ui = root.get_node("UILayer/UI")
-	print(["ui ",ui])
+#	print(["ui ",ui])
 	bosshp = ui.get_node("BossHP")
 	fader = root.get_node("UILayer/Fade")
 	face_anim = ui.get_node("FaceAnim")
